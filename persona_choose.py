@@ -48,7 +48,7 @@ def persona_choose_page():
             text-align: center;
             font-family: Arial, sans-serif;
             width: 100%;
-            max-width: 500px;
+            max-width: 700px;
         }
         .block-container {
             padding-top: 20px !important;

@@ -48,11 +48,11 @@ def persona_choose_page():
             text-align: center;
             font-family: Arial, sans-serif;
             width: 100%;
-            max-width: 700px;
+            max-width: 500px;
         }
         .block-container {
-            padding-top: 13px !important;
-            margin-top: 13px !important;
+            padding-top: 20px !important;
+            margin-top: 20px !important;
         }
 
         .title {

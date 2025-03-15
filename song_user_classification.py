@@ -17,7 +17,6 @@ def song_user_classification_page():
 
     if current_index < len(songs_df):
         current_song = songs_df.loc[current_index, 'song']
-        st.empty()  # משמש כדי לצמצם את הרווח הראשוני
         st.markdown(
             """
             <style>
@@ -26,6 +25,7 @@ def song_user_classification_page():
                 color: white;
                 border-radius: 25px;
                 padding: 20px;
+                margin: auto;
                 text-align: center;
                 box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
                 max-width: 500px;
@@ -33,6 +33,10 @@ def song_user_classification_page():
                 font-family: Arial, sans-serif;
                 font-size: 22px;
                 border: 3px solid #a0c4ff;
+            }
+            .block-container {
+                padding-top: 10px !important;
+                margin-top: 10px !important;
             }
             .song-title {
                 font-size: 20px;
@@ -77,6 +81,7 @@ def song_user_classification_page():
             }
 
             </style>
+            
             """,
             unsafe_allow_html=True,
         )

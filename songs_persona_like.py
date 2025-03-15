@@ -22,7 +22,6 @@ def songs_persona_like_page():
         st.rerun()
     else:
         song_title = songs_list[current_index]
-        st.empty()  # משמש כדי לצמצם את הרווח הראשוני
         st.markdown(
             """
             <style>
@@ -38,6 +37,10 @@ def songs_persona_like_page():
                 font-family: Arial, sans-serif;
                 font-size: 22px;
                 border: 3px solid #a0c4ff;
+            }
+            .block-container {
+                padding-top: 10px !important;
+                margin-top: 10px !important;
             }
             .song-title {
                 font-size: 20px;

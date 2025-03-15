@@ -51,8 +51,8 @@ def persona_choose_page():
             max-width: 700px;
         }
         .block-container {
-            padding-top: 7px !important;
-            margin-top: 7px !important;
+            padding-top: 10px !important;
+            margin-top: 10px !important;
         }
 
         .title {
@@ -113,7 +113,7 @@ def persona_choose_page():
     st.markdown(
         f"""
             <div class="container">
-                <div class="title">Meet {chosen_person['name']}!!!</div>
+                <div class="title">Meet {chosen_person['name']}!</div>
                 <div class="sub_title"> based on your musical taste you can be friends! </div>
             </div>
             """,

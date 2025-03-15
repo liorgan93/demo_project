@@ -18,9 +18,9 @@ def method_choose_page():
     from Intro import set_background
     set_background("other images/Backround.webp")
 
-    record_topk = get_base64_image("a.jpg")
-    record_personalization = get_base64_image("b.webp")
-    record_advanced = get_base64_image("c.webp")
+    record_topk = get_base64_image("other images/blue.jpg")
+    record_personalization = get_base64_image("other images/green.jpg")
+    record_advanced = get_base64_image("other images/red.jpg")
 
     # Main Title with a solid background for readability
     st.markdown("""
@@ -47,7 +47,6 @@ def method_choose_page():
             display: flex;
             flex-direction: column;
 
-
         }
         .st-key-aa button:hover, .st-key-bb button:hover, .st-key-cc button:hover {
             transform: rotate(360deg) scale(1.1);
@@ -55,26 +54,12 @@ def method_choose_page():
         }
         .st-key-aa button {
             background-image: url('data:image/webp;base64,""" + record_topk + """');
-            background-size: cover;
-            background-position: center;
         }
         .st-key-bb button {
             background-image: url('data:image/webp;base64,""" + record_personalization + """');
-            background-size: cover;
-            background-position: center;
         }
         .st-key-cc button {
             background-image: url('data:image/webp;base64,""" + record_advanced + """');
-            background-size: cover;
-            background-position: center;
-        }
-        .selected-page {
-            background-color: rgba(50, 0, 100, 0.8);
-            padding: 10px;
-            border-radius: 10px;
-            color: #E6E6FA;
-            text-align: center;
-            font-size: 18px;
         }
         </style>
     """, unsafe_allow_html=True)

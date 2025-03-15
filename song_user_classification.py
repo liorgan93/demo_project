@@ -4,7 +4,7 @@ from Intro import set_background
 import time
 
 def song_user_classification_page():
-    time.sleep(0.5)
+    time.sleep(0.2)
     set_background("other images/Backround.webp")
     songs_df = pd.read_csv('playlists_excel/classification_songs.csv')
 

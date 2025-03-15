@@ -19,7 +19,7 @@ def set_background(image_file):
         st.markdown(page_background, unsafe_allow_html=True)
 
 def Intro_know_or_dont_page():
-    time.sleep(0.5)
+    time.sleep(0.2)
     set_background("other images/Backround.webp")
 
     st.markdown(

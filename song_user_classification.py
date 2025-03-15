@@ -73,8 +73,8 @@ def song_user_classification_page():
             img {
                 border-radius: 15px;
                 max-width: 100%;
-                width: 630px; /* קובע את הרוחב */
-                height: 500px; /* קובע את הגובה */
+                width: 420px; /* קובע את הרוחב */
+                height: 333px; /* קובע את הגובה */
                 object-fit: cover; /* שומר על יחס וממלא את השטח */
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 transition: transform 0.3s ease-in-out;

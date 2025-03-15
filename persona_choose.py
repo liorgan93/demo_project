@@ -75,13 +75,13 @@ def persona_choose_page():
         }
 
         img {
-                border-radius: 15px;
-                max-width: 100%;
-                width: 630px;
-                height: 500px;
-                object-fit: cover;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                transition: transform 0.3s ease-in-out;
+            border-radius: 15px;
+            max-width: 100%;
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
             }
 
         img:hover {

@@ -48,10 +48,6 @@ def home_page():
             color: #81D4FA;
             margin-bottom: 20px;
         }}
-        .spotify-logo {{
-            width: 150px;
-            margin-bottom: 20px;
-        }}
         .treble-clef {{
             width: 350px;
             height: 70px;
@@ -101,38 +97,39 @@ def home_page():
         """,
         unsafe_allow_html=True,
     )
+
     start = get_base64_image("other images/start.png")
 
     st.markdown("""
-            <style>
-            .st-key-start_button button{
-                width: 150px;
-                height: 150px;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                border-radius: 50%;
-                transition: transform 0.6s ease-in-out, box-shadow 0.3s;
-                box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-                background-image: url('data:image/webp;base64,""" + start + """');
-                background-size: cover;
-                background-position: center;
-            }
-            .st-key-start_button button:hover {
-                transform: rotate(360deg) scale(1.1);
-                box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
-            }
-            .st-key-start_button button {
-                
-            </style>
-        """, unsafe_allow_html=True)
+        <style>
+        .st-key-start_button {
+            display: flex;
+            justify-content: center;
+        }
+        .st-key-start_button button{
+            width: 150px;
+            height: 150px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: transform 0.6s ease-in-out, box-shadow 0.3s;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+            background-image: url('data:image/webp;base64,""" + start + """');
+            background-size: cover;
+            background-position: center;
+        }
+        .st-key-start_button button:hover {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([2, 1, 2])
+    col1, col2, col3 = st.columns([1, 1, 1])
 
     with col2:
         st.button("", key="start_button", on_click=click_button, use_container_width=True)
-
-
 
 
 if "page" not in st.session_state:

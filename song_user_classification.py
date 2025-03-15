@@ -35,8 +35,8 @@ def song_user_classification_page():
                 border: 3px solid #a0c4ff;
             }
             .block-container {
-                padding-top: 5px !important;
-                margin-top: 5px !important;
+                padding-top: 7px !important;
+                margin-top: 7px !important;
             }
             .song-title {
                 font-size: 20px;
@@ -88,7 +88,7 @@ def song_user_classification_page():
         st.markdown(
             f"""
             <div class="container">
-                <div class="song-title">{current_song}!!!!!</div>
+                <div class="song-title">{current_song}</div>
             </div>
             """,
             unsafe_allow_html=True,

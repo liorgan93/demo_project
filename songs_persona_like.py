@@ -39,8 +39,8 @@ def songs_persona_like_page():
                 border: 3px solid #a0c4ff;
             }
             .block-container {
-                padding-top: 10px !important;
-                margin-top: 10px !important;
+                padding-top: 7px !important;
+                margin-top: 7px !important;
             }
             .song-title {
                 font-size: 20px;
@@ -94,7 +94,7 @@ def songs_persona_like_page():
         st.markdown(
             f"""
             <div class=\"container\">
-                <div class=\"song-title\">{song_title}</div>
+                <div class=\"song-title\">{song_title}!!!!</div>
             </div>
             """,
             unsafe_allow_html=True,

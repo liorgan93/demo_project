@@ -93,6 +93,39 @@ def home_page():
         st.button("", key="start_button", on_click=click_button)
 
 
+    st.markdown("""
+        <style>
+        .button-container {
+            display: flex;
+            gap: 0px;
+            align-items: center;
+        }
+        .stButton > button {
+            margin: 0px !important;
+            padding: 0px 0px;
+            border-radius: 0;
+        }
+        .stButton {
+            flex-grow: 1;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    # שימוש ב-st.columns עם קונפיגורציה מדויקת כדי למנוע רווחים
+    col1, col2, col3 = st.columns([1, 1,15])
+
+    with col1:
+        btn1 = st.button("A", key="btn1")
+
+    with col2:
+        btn2 = st.button("B", key="btn2")
+
+
+
+
+
+
+
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 

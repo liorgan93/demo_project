@@ -35,7 +35,7 @@ def home_page():
             overflow-x: hidden;
         }}
         .title-text {{
-            font-size: 64px;
+            font-size: 80px;
             font-weight: bold;
             text-shadow: 4px 4px 15px rgba(0,150,255,0.9);
             color: #B3E5FC;
@@ -53,7 +53,7 @@ def home_page():
         </style>
         <div class="container">
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
-            <p class="title-text">🎶 Welcome to the Music Recommendation Experience 🎶</p>
+            <p class="title-text"> Welcome to the Music Recommendation Experience 🎶</p>
             <p class="subtitle-text">Demonstrating the performance of Algorithm Y for music recommendation systems. This comparison between human intuition and data-driven solutions will be done by analyzing the differences between your song choices and the algorithm’s recommendations based on Spotify data</p>
         </div>
         """,
@@ -111,7 +111,6 @@ def home_page():
         </style>
         """, unsafe_allow_html=True)
 
-    # שימוש ב-st.columns עם קונפיגורציה מדויקת כדי למנוע רווחים
     col1, col2, col3 = st.columns([1, 1,15])
 
     with col1:

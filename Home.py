@@ -91,7 +91,7 @@ def home_page():
         </style>
         <div class="container">
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
-            <p class="title-text">🎶 Welcome to the Music Recommendation Experience 🎶</p>
+            <p class="title-text">🎶 Welcome to our Music Recommendation Experience 🎶</p>
             <p class="subtitle-text">Demonstrating the performance of Algorithm Y for music recommendation systems. This comparison between human intuition and data-driven solutions will be done by analyzing the differences between your song choices and the algorithm’s recommendations based on Spotify data</p>
         </div>
         """,

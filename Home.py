@@ -97,12 +97,10 @@ def home_page():
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
             <p class="title-text">🎶 Welcome to the Music Recommendation Experience 🎶</p>
             <p class="subtitle-text">Demonstrating the performance of Algorithm Y for music recommendation systems. This comparison between human intuition and data-driven solutions will be done by analyzing the differences between your song choices and the algorithm’s recommendations based on Spotify data</p>
-            <img class="spotify-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo">
         </div>
         """,
         unsafe_allow_html=True,
     )
-
     start = get_base64_image("other images/start.png")
 
     st.markdown("""

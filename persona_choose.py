@@ -44,15 +44,15 @@ def persona_choose_page():
             background-color: #ffffff;
             border-radius: 30px;
             padding: 10px;
-            font-weight: 900px;
+            font-weight: 600px;
             text-align: center;
             font-family: Arial, sans-serif;
             width: 100%;
             max-width: 700px;
         }
         .block-container {
-            padding-top: 10px !important;
-            margin-top: 10px !important;
+            padding-top: 13px !important;
+            margin-top: 13px !important;
         }
 
         .title {

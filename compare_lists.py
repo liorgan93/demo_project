@@ -82,4 +82,5 @@ def compare_lists_page():
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        st.button("Next", key="next-btn", use_container_width=True)
+        if st.button("Next!", key="next-btn", use_container_width=True):
+            st.session_state.page = "thank_you"

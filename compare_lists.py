@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 
 def compare_lists_page():
-    def handle_start_click():
-        st.session_state.page = "thank_you"
+
 
     selected_songs = st.session_state.user_choice
     algorithm_df = pd.read_csv("alg_results.csv")
@@ -83,4 +82,4 @@ def compare_lists_page():
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        st.button("Next", key="next-btn", on_click=handle_start_click, use_container_width=True)
+        st.button("Next", key="next-btn", use_container_width=True)

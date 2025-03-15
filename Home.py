@@ -14,9 +14,7 @@ def home_page():
 
     set_background("other images/Backround.webp")
 
-    image_base64 = get_base64_image("other images/music_notes.png")
-
-
+    image_base64 = get_base64_image("other images/Music_notes.png")
 
     st.markdown(
         f"""
@@ -24,17 +22,17 @@ def home_page():
         .container {{
             background: linear-gradient(135deg, rgba(10, 10, 40, 0.9), rgba(20, 20, 60, 0.95));
             border-radius: 20px;
-            padding: 15px 20px;
+            padding: 20px;
             box-shadow: 0px 0px 20px rgba(0, 0, 100, 0.8);
             text-align: center;
             margin: auto;
             width: 80%;
-            max-width: 100%; 
+            max-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden; /* מונע גלילה אופקית */
+            overflow-x: hidden;
         }}
         .title-text {{
             font-size: 64px;
@@ -49,49 +47,13 @@ def home_page():
             margin-bottom: 20px;
         }}
         .treble-clef {{
-            width: 350px;
-            height: 70px;
-            margin-bottom: 20px;
-        }}
-        @media (max-width: 768px) {{
-            .container {{
-                width: 95%;
-                padding: 20px;
-            }}
-            .title-text {{
-                font-size: 48px;
-            }}
-            .subtitle-text {{
-                font-size: 20px;
-            }}
-            .start-button {{
-                font-size: 18px;
-                padding: 12px 24px;
-            }}
-            .treble-clef {{
-                width: 80%;
-                max-width: 300px;
-            }}
-        }}
-        @media (max-width: 480px) {{
-            .title-text {{
-                font-size: 36px;
-            }}
-            .subtitle-text {{
-                font-size: 16px;
-            
-            .treble-clef {{
-                width: 70%;
-                max-width: 250px;
-            }}
-            .spotify-logo {{
-                width: 120px;
-            }}
+            margin-bottom: 0px;
+            max-width: 100%;
         }}
         </style>
         <div class="container">
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
-            <p class="title-text">🎶 Welcome to our Music Recommendation Experience 🎶</p>
+            <p class="title-text">🎶 Welcome to the Music Recommendation Experience 🎶</p>
             <p class="subtitle-text">Demonstrating the performance of Algorithm Y for music recommendation systems. This comparison between human intuition and data-driven solutions will be done by analyzing the differences between your song choices and the algorithm’s recommendations based on Spotify data</p>
         </div>
         """,
@@ -102,10 +64,6 @@ def home_page():
 
     st.markdown("""
         <style>
-        .st-key-start_button {
-            display: flex;
-            justify-content: center;
-        }
         .st-key-start_button button{
             width: 150px;
             height: 150px;
@@ -117,7 +75,10 @@ def home_page():
             box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
             background-image: url('data:image/webp;base64,""" + start + """');
             background-size: cover;
-            background-position: center;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+
         }
         .st-key-start_button button:hover {
             transform: rotate(360deg) scale(1.1);
@@ -129,7 +90,7 @@ def home_page():
     col1, col2, col3 = st.columns([1, 1, 1])
 
     with col2:
-        st.button("", key="start_button", on_click=click_button, use_container_width=True)
+        st.button("", key="start_button", on_click=click_button)
 
 
 if "page" not in st.session_state:

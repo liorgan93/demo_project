@@ -42,6 +42,11 @@ def method_choose_page():
             border-radius: 50%;
             transition: transform 0.6s ease-in-out, box-shadow 0.3s;
             box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+
+
         }
         .st-key-aa button:hover, .st-key-bb button:hover, .st-key-cc button:hover {
             transform: rotate(360deg) scale(1.1);
@@ -73,7 +78,7 @@ def method_choose_page():
         </style>
     """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([2,1,2])
+    col1, col2, col3 = st.columns([1,1,1])
 
     with col2:
         st.button("", key="aa", on_click=click_a, use_container_width=True)

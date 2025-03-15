@@ -2,9 +2,8 @@ import streamlit as st
 import pandas as pd
 
 def compare_lists_page():
-    ALGORITHM_SONGS_FILE = "alg_results.xlsx"
     selected_songs = st.session_state.user_choice
-    algorithm_df = pd.read_excel(ALGORITHM_SONGS_FILE)
+    algorithm_df = pd.read_excel("alg_results.xlsx")
 
     if 'top_k' not in algorithm_df.columns:
         st.error("Error: The file must contain a 'top_k' column.")

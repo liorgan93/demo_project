@@ -112,28 +112,30 @@ def top_k_choose_page():
 
     cols = st.columns(3, gap="small")
 
+    def encode_audio(audio_path):
+        """ממיר קובץ אודיו ל-Base64"""
+        try:
+            with open(audio_path, "rb") as audio_file:
+                encoded_audio = base64.b64encode(audio_file.read()).decode()
+            return encoded_audio
+        except FileNotFoundError:
+            return None
 
-    # נתיב לתיקיית האודיו
-    audio_folder = "top_k_songs_audio"
-
-    # נניח ש-songs_data הוא DataFrame עם עמודה 'song' שמכילה את שמות השירים
     for idx, row in songs_data.iterrows():
         song_name = row["song"]
         audio_path = os.path.join(audio_folder, f"{song_name}.mp3")
 
-        # יש לוודא שהנתיב נגיש דרך השרת
-        if os.path.exists(audio_path):
-            audio_url = f"/tmp/{song_name}.mp3"  # נתיב שייחשף דרך Streamlit
-            os.system(f"cp {audio_path} /tmp/{song_name}.mp3")  # העתקת הקובץ לתיקיית זמנית
-
-            audio_html = f"""
-            <audio controls style="width: 100%; height: 30px;">
-                <source src="{audio_url}" type="audio/mpeg">
-                הדפדפן שלך לא תומך בהשמעת אודיו.
-            </audio>
-            """
+        with cols[idx % 3]:
             with st.expander(f"🎧 Listen to {song_name}"):
-                components.html(audio_html, height=40)
-        else:
-            st.error(f"Could not load audio for {song_name}.")
+                audio_base64 = encode_audio(audio_path)
 
+                if audio_base64:
+                    audio_html = f"""
+                    <audio controls style="width: 100%; height: 30px;">
+                        <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mpeg">
+                        הדפדפן שלך לא תומך בהשמעת אודיו.
+                    </audio>
+                    """
+                    components.html(audio_html, height=40)  # הקטנת גובה נוסף
+                else:
+                    st.error(f"Could not load audio for {song_name}.")

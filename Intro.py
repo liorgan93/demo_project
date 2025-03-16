@@ -108,7 +108,7 @@ def Intro_page():
                 flex-direction: column;
 
             }
-            .st-key-lets_go_button button:hover {
+            .st-key-lets_go button:hover {
                 transform: rotate(360deg) scale(1.1);
                 box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
             }

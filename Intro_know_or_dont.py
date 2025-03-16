@@ -2,6 +2,10 @@ import streamlit as st
 import base64
 import time
 
+def get_base64_image(image_path):
+    with open(image_path, "rb") as file:
+        return base64.b64encode(file.read()).decode()
+
 def set_background(image_file):
     with open(image_file, "rb") as image:
         encoded_image = base64.b64encode(image.read()).decode()
@@ -20,6 +24,9 @@ def set_background(image_file):
 
 def Intro_know_or_dont_page():
     set_background("other images/Backround.webp")
+
+    def handle_start_click():
+        st.session_state.page = "songs_persona_like"
 
     st.markdown(
         """
@@ -105,11 +112,34 @@ def Intro_know_or_dont_page():
         </div>
     """, unsafe_allow_html=True)
 
+    lets_go = get_base64_image("other images/lets go.png")
 
-    def handle_start_click():
-        st.session_state.page = "songs_persona_like"
+    st.markdown("""
+                <style>
+                .st-key-lets_go button{
+                    width: 130px;
+                    height: 130px;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    transition: transform 0.6s ease-in-out, box-shadow 0.3s;
+                    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+                    background-image: url('data:image/webp;base64,""" + lets_go + """');
+                    background-size: cover;
+                    margin: auto;
+                    display: flex;
+                    flex-direction: column;
+
+                }
+                .st-key-lets_go button:hover {
+                    transform: rotate(360deg) scale(1.1);
+                    box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
+                }
+                </style>
+            """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        st.button("Let's go!", key="continue-btn", on_click=handle_start_click, use_container_width=True)
+        st.button("", key="lets_go", on_click=handle_start_click)
 

@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import os
 import streamlit.components.v1 as components
-import base64
 
 st.set_page_config(page_title="Select Your Songs", layout="wide")
 
@@ -112,22 +111,24 @@ def top_k_choose_page():
 
     cols = st.columns(3, gap="small")
 
-    def encode_audio(audio_path):
-        """ממיר קובץ אודיו ל-Base64"""
-        try:
-            with open(audio_path, "rb") as audio_file:
-                encoded_audio = base64.b64encode(audio_file.read()).decode()
-            return encoded_audio
-        except FileNotFoundError:
-            return None
+    # הגדרת נתיב התיקייה שבה נמצאים קובצי ה-Base64
+    audio_folder = "top_k_songs_audio"
+
+    def load_base64_audio(audio_path):
+        with open(audio_path, "r") as file:
+            return file.read().strip()  # קריאת התוכן כטקסט
+
+    st.title("🎵 Song Recommendation Demo")
+
+    cols = st.columns(3)  # יצירת עמודות לתצוגה
 
     for idx, row in songs_data.iterrows():
         song_name = row["song"]
-        audio_path = os.path.join(audio_folder, f"{song_name}.mp3")
+        b64_path = os.path.join(audio_folder, f"{song_name}.txt")  # יצירת הנתיב לקובץ Base64
 
-        with cols[idx % 3]:
+        with cols[idx % 3]:  # פיזור השירים על 3 עמודות
             with st.expander(f"🎧 Listen to {song_name}"):
-                audio_base64 = encode_audio(audio_path)
+                audio_base64 = load_base64_audio(b64_path)
 
                 if audio_base64:
                     audio_html = f"""
@@ -139,3 +140,4 @@ def top_k_choose_page():
                     components.html(audio_html, height=40)  # הקטנת גובה נוסף
                 else:
                     st.error(f"Could not load audio for {song_name}.")
+

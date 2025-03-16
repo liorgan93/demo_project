@@ -3,6 +3,8 @@ import pandas as pd
 import os
 import streamlit.components.v1 as components
 import base64
+from flask import Flask, send_from_directory
+from threading import Thread
 
 st.set_page_config(page_title="Select Your Songs", layout="wide")
 
@@ -121,21 +123,35 @@ def top_k_choose_page():
         except FileNotFoundError:
             return None
 
+    audio_folder = "static/top_k_songs_audio"
+
+    cols = st.columns(3)  # יצירת שלושה עמודות לתצוגה
+
+    app = Flask(__name__)
+
+    @app.route('/static/<path:filename>')
+    def serve_static(filename):
+        return send_from_directory("static", filename)
+
+    def run_flask():
+        app.run(port=8000, debug=False, use_reloader=False)
+
+    # הפעלת Flask אם לא פועל
+    if "flask_thread" not in st.session_state:
+        st.session_state.flask_thread = Thread(target=run_flask)
+        st.session_state.flask_thread.start()
+
+    # עדכון ה-URL לאודיו כדי להשתמש בשרת Flask
     for idx, row in songs_data.iterrows():
         song_name = row["song"]
-        audio_path = os.path.join(audio_folder, f"{song_name}.mp3")
+        audio_url = f"http://localhost:8000/static/top_k_songs_audio/{song_name}.mp3"
 
         with cols[idx % 3]:
             with st.expander(f"🎧 Listen to {song_name}"):
-                audio_base64 = encode_audio(audio_path)
-
-                if audio_base64:
-                    audio_html = f"""
-                    <audio controls style="width: 100%; height: 30px;">
-                        <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mpeg">
-                        הדפדפן שלך לא תומך בהשמעת אודיו.
-                    </audio>
-                    """
-                    components.html(audio_html, height=40)  # הקטנת גובה נוסף
-                else:
-                    st.error(f"Could not load audio for {song_name}.")
+                audio_html = f"""
+                <audio controls style="width: 100%; height: 30px;">
+                    <source src="{audio_url}" type="audio/mpeg">
+                    הדפדפן שלך לא תומך בהשמעת אודיו.
+                </audio>
+                """
+                st.markdown(audio_html, unsafe_allow_html=True)

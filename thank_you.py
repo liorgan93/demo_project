@@ -6,6 +6,7 @@ import time
 def thank_you_page():
     time.sleep(0.5)
     set_background("other images/Backround.webp")
+    st.balloons()
     st.markdown(
         """
         <style>

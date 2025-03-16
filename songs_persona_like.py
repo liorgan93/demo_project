@@ -29,7 +29,8 @@ def songs_persona_like_page():
                 background: linear-gradient(90deg, #3b5998, #4a69bd); 
                 color: white;
                 border-radius: 25px;
-                padding: 20px;
+                padding: 13px;
+                margin: auto;
                 text-align: center;
                 box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
                 max-width: 500px;
@@ -37,6 +38,7 @@ def songs_persona_like_page():
                 font-family: Arial, sans-serif;
                 font-size: 22px;
                 border: 3px solid #a0c4ff;
+                margin-bottom: 3px !important;
             }
             .block-container {
                 padding-top: 7px !important;
@@ -49,24 +51,13 @@ def songs_persona_like_page():
                 text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 10px rgba(255, 255, 255, 0.6);
             }
             .stButton button {
-                    padding: 10px 30px !important;
-                    border-radius: 15px !important;
-                    margin: 10px auto !important;
-                    display: flex !important;
-                    justify-content: center !important;
-                    align-items: center !important;
+                padding: 8px 25px !important;
+                border-radius: 15px !important;
+                margin: 10px auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
             }
-            
-            .st-key-know_song button:hover {
-                    background-color: green;
-                    background-blend-mode: overlay;
-                }
-                
-            .st-key-dont_know_song button:hover {
-                background-color: red;
-                background-blend-mode: overlay;
-                }
-                
             .feedback-container {
                 margin-top: 20px;
                 background: #222;
@@ -74,17 +65,39 @@ def songs_persona_like_page():
                 border-radius: 10px;
                 text-align: center;
             }
-            
+
+            .st-key-know button {
+                background-color: #32CD32;
+                background-blend-mode: overlay;
+                transition: background-color 0.3s ease;
+
+            }
+
+            .st-key-dont_know button {
+                background-color: red;
+                background-blend-mode: overlay;
+                transition: background-color 0.3s ease;
+
+            }
+            .st-key-know button:hover {
+                background-color: #008000;
+                background-blend-mode: overlay;
+
+            }
+            .st-key-dont_know button:hover {
+                background-color: #B22222;
+                background-blend-mode: overlay;
+
+            }
             img {
                 border-radius: 15px;
-                width: 500px; 
-                height: 250px; 
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                display: block;
                 margin: auto;
+                display: flex;
+                flex-direction: column;
             }
-            
             </style>
+
             """,
             unsafe_allow_html=True,
         )
@@ -99,7 +112,7 @@ def songs_persona_like_page():
         )
 
         # Load image
-        col1, col2, col3 = st.columns([1, 5, 1])
+        col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
 
         with col2:
             image_path = f"‏‏personas_songs_images/{song_title}.jpg"
@@ -120,8 +133,8 @@ def songs_persona_like_page():
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.button("❌", key="dont_know_song", on_click=handle_dont_know_song)
+            st.button("❌", key="dont_know", on_click=handle_dont_know_song)
 
         with col3:
-            st.button("✅", key="know_song", on_click=handle_know_song)
+            st.button("✅", key="know", on_click=handle_know_song)
 

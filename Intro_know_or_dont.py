@@ -76,12 +76,14 @@ def Intro_know_or_dont_page():
             color: #ffffff;
         }
         .green-text {
-            color: #008000; 
+            color: #50c878;
             font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
         }
         .red-text {
-            color: red; 
+            color: #FF4747; 
             font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
         }
         </style>
         """,

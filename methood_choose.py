@@ -46,8 +46,8 @@ def method_choose_page():
     st.markdown("""
         <style>
         .st-key-aa button, .st-key-bb button, .st-key-cc button {
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
             background-color: transparent;
             border: none;
             cursor: pointer;

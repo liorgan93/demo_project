@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 from Intro import set_background
+import time
 
 
 def get_base64_image(image_path):
@@ -26,8 +27,8 @@ def home_page():
             box-shadow: 0px 0px 20px rgba(0, 0, 100, 0.8);
             text-align: center;
             margin: auto;
-            width: 90%;
-            max-width: 100%;
+            width: 980%;
+            max-width: 98%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,7 +58,7 @@ def home_page():
         </style>
         <div class="container">
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
-            <p class="title-text">🎶 Welcome to the Music Recommendation Experience 🎶</p>
+            <p class="title-text">Welcome to the Music Recommendation Experience 🎶</p>
             <p class="subtitle-text">In this demo, you’ll recommend songs for someone, and we’ll compare your picks to Algorithm Y’s suggestions to demonstrate its performance. Let’s see how your intuition compares to data-driven recommendations!</p>
         </div>
         """,
@@ -66,13 +67,12 @@ def home_page():
 
     start = get_base64_image("other images/start.png")
 
-    st.snow()
 
     st.markdown("""
         <style>
         .st-key-start_button button{
-            width: 110px;
-            height: 110px;
+            width: 130px;
+            height: 130px;
             background-color: transparent;
             border: none;
             cursor: pointer;
@@ -98,6 +98,7 @@ def home_page():
     with col2:
         st.button("", key="start_button", on_click=click_button)
 
+
     st.markdown("""
         <style>
             .column-box {
@@ -107,29 +108,6 @@ def home_page():
             }
         </style>
     """, unsafe_allow_html=True)
-
-    # יצירת עמודות עם גבולות ויזואליים
-    col1, col2, col3 = st.columns([0.1, 0.1, 0.8])  # מחלקים את המסך לשני חלקים שווים
-
-    with col1:
-        st.markdown('<div class="column-box">📦 עמודה 1</div>', unsafe_allow_html=True)
-
-    with col2:
-        st.markdown('<div class="column-box">📦 עמודה 2</div>', unsafe_allow_html=True)
-    with col3:
-        st.markdown('<div class="column-box">📦 עמודה 3</div>', unsafe_allow_html=True)
-
-    with col1:
-        if st.button("👍 Like"):
-            st.write("You liked the song!")
-
-    with col2:
-        if st.button("👎 Dislike"):
-            st.write("You disliked the song!")
-
-
-
-
 
 
 

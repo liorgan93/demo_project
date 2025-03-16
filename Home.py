@@ -98,6 +98,8 @@ def home_page():
 
     with col2:
         st.button("", key="start_button", on_click=click_button)
+        if st.button("", key="aaaaaa"):
+            st.session_state.page = "aaaaa"
 
 
     st.markdown("""
@@ -145,3 +147,6 @@ elif st.session_state.page == "compare_lists":
 elif st.session_state.page == "thank_you":
     from thank_you import thank_you_page
     thank_you_page()
+elif st.session_state.page == "aaaaa":
+    from aaaaa import page_with_fixed_columns
+    page_with_fixed_columns()

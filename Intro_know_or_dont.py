@@ -25,7 +25,7 @@ def Intro_know_or_dont_page():
         """
         <style>
         .container {
-            background: linear-gradient(135deg, #2a5ba8, #4c82c7, #3b6fb3);
+            background: linear-gradient(135deg, rgba(42, 91, 168, 0.97), rgba(76, 130, 199, 0.97), rgba(59, 111, 179, 0.97));
             color: white;
             border-radius: 25px;
             padding: 25px;

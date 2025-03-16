@@ -39,13 +39,15 @@ def songs_persona_like_page():
                 font-size: 22px;
                 border: 3px solid #a0c4ff;
                 margin-bottom: 3px !important;
+                padding-right: 0px;
+                padding-left: 0px;
             }
             .block-container {
                 padding-top: 7px !important;
                 margin-top: 7px !important;
             }
             .song-title {
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;
                 color: #ecf0f1;
                 text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 10px rgba(255, 255, 255, 0.6);
@@ -53,17 +55,10 @@ def songs_persona_like_page():
             .stButton button {
                 padding: 8px 25px !important;
                 border-radius: 15px !important;
-                margin: 10px auto !important;
+                margin: 0px auto !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-            }
-            .feedback-container {
-                margin-top: 20px;
-                background: #222;
-                padding: 10px;
-                border-radius: 10px;
-                text-align: center;
             }
 
             .st-key-know button {
@@ -112,7 +107,7 @@ def songs_persona_like_page():
         )
 
         # Load image
-        col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
+        col1, col2, col3 = st.columns([1, 1, 1])
 
         with col2:
             image_path = f"‏‏personas_songs_images/{song_title}.jpg"

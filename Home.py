@@ -21,13 +21,14 @@ def home_page():
         f"""
         <style>
         .container {{
-            background: linear-gradient(135deg, rgba(10, 10, 40, 0.9), rgba(20, 20, 60, 0.95));
+            background: linear-gradient(135deg, rgba(10, 10, 40, 0.97), rgba(20, 20, 60, 0.97));
             border-radius: 20px;
             padding: 7px;
             box-shadow: 0px 0px 20px rgba(0, 0, 100, 0.8);
             text-align: center;
             margin: auto;
-            width: 980%;
+            margin-bottom: 10px;
+            width: 98%;
             max-width: 98%;
             display: flex;
             flex-direction: column;

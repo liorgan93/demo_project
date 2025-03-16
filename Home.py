@@ -148,5 +148,5 @@ elif st.session_state.page == "thank_you":
     from thank_you import thank_you_page
     thank_you_page()
 elif st.session_state.page == "aaaaa":
-    from aaaaa import page_with_fixed_columns
-    page_with_fixed_columns()
+    from aaaaa import top_k_choose_page
+    top_k_choose_page()

@@ -1,10 +1,12 @@
 import streamlit as st
 import pandas as pd
 import os
+import streamlit.components.v1 as components
+import base64
 
-st.set_page_config(page_title="Songs Demo", layout="wide")
+st.set_page_config(page_title="Select Your Songs", layout="wide")
 
-def page_with_fixed_columns():
+def top_k_choose_page():
     from Intro import set_background
     set_background("other images/Backround.webp")
 
@@ -12,44 +14,128 @@ def page_with_fixed_columns():
     csv_file_path = "playlists_excel/top_k_songs.csv"
     songs_data = pd.read_csv(csv_file_path)
 
-    persona_name = "dddddd"
+    persona_name = "kkkkkkkk"
 
-    st.markdown(f"<h1 style='text-align:center;'>Recommend songs to {persona_name} 🎵</h1>", unsafe_allow_html=True)
-
-    selected_songs = st.multiselect("Select exactly 3 songs:", songs_data["song"].tolist(), max_selections=3)
-
-    # פתרון CSS לבעיה שלך:
     st.markdown("""
-        <style>
-            @media (max-width: 768px) {
-                div[data-testid="column"] {
-                    width: unset !important;
-                    flex-direction: row !important;
-                }
-            }
-        </style>
+    <style>
+
+        .block-container {
+            padding-top: 20px !important;
+            padding-bottom: 2px !important;
+            margin: 0px !important;
+        }
+
+        .custom-container {
+            background: linear-gradient(135deg, rgba(30, 30, 80, 0.97), rgba(50, 50, 110, 0.97));
+            padding: 0px; /* הפחתת הפדינג */
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            margin-bottom: 1px; /* ביטול רווחים מיותרים */
+            margin-top: 1px; /* מוסיף רווח מהחלק העליון */
+        }
+
+        /* כותרת עליונה - קטנה יותר עם יותר רווח למעלה */
+        .custom-container h3 {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        /* Expander דחוס יותר */
+        div[data-testid="stExpander"] {
+            background: linear-gradient(135deg, rgba(30, 30, 80, 0.97), rgba(50, 50, 110, 0.97));
+            color: white !important;
+            border-radius: 8px !important;
+            margin-bottom: 2px !important; /* רווח מינימלי */
+            padding: 3px !important; /* פחות padding */
+        }
+
+        /* צמצום התוכן של ה-expander */
+        div[data-testid="stExpander"] div.streamlit-expanderContent {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            padding: 3px !important;
+            border-radius: 8px !important;
+            font-size: 14px; /* גופן קטן יותר */
+        }
+
+        /* כותרת בתוך ה-expander קטנה יותר */
+        div[data-testid="stExpander"] summary {
+            font-size: 14px !important;
+            padding: 3px !important;
+        }
+
+        /* צמצום מרווחים בין האלמנטים בעמודות */
+        div.st-emotion-cache-1fcmnav {
+            padding: 0px !important;
+            margin: 0px !important;
+        }
+
+        /* עיצוב כפתור */
+        .stButton > button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 15px;
+            padding: 5px 15px; /* כפתור יותר קטן */
+            font-size: 14px;
+        }
+
+        .stButton > button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
     """, unsafe_allow_html=True)
 
-    cols = st.columns(3)
+    with st.container():
+        st.markdown(f"<div class='custom-container'><h3>Recommend to {persona_name} the Top 3 songs 🎵</h3></div>", unsafe_allow_html=True)
+
+        selected_songs = st.multiselect("", songs_data["song"].tolist(), max_selections=3)
+
+        if "error_msg" not in st.session_state:
+            st.session_state.error_msg = ""
+
+        def handle_confirm_click():
+            if len(selected_songs) != 3:
+                st.session_state.error_msg = "You must select exactly 3 songs before continuing."
+            else:
+                st.session_state.page = "compare_lists"
+                st.session_state.user_choice = selected_songs
+
+        st.button("Confirm", key="confirm_button", on_click=handle_confirm_click)
+
+        if st.session_state.error_msg:
+            st.error(st.session_state.error_msg)
+
+    cols = st.columns(3, gap="small")
+
+    def encode_audio(audio_path):
+        """ממיר קובץ אודיו ל-Base64"""
+        try:
+            with open(audio_path, "rb") as audio_file:
+                encoded_audio = base64.b64encode(audio_file.read()).decode()
+            return encoded_audio
+        except FileNotFoundError:
+            return None
+
     for idx, row in songs_data.iterrows():
         song_name = row["song"]
         audio_path = os.path.join(audio_folder, f"{song_name}.mp3")
 
         with cols[idx % 3]:
-            st.markdown(f"<h4>🎵 {song_name}</h4>", unsafe_allow_html=True)
+            with st.expander(f"🎧 Listen to {song_name}"):
+                audio_base64 = encode_audio(audio_path)
 
-            try:
-                audio_file = open(audio_path, "rb").read()
-                st.audio(audio_file, format="audio/mp3")
-            except FileNotFoundError:
-                st.error(f"Audio for {song_name} not found.")
-
-    def handle_confirm_click():
-        if len(selected_songs) != 3:
-            st.error("You must select exactly 3 songs before continuing.")
-        else:
-            st.session_state.page = "compare_lists"
-            st.session_state.user_choice = selected_songs
-
-    st.button("Confirm", key="confirm_button", on_click=handle_confirm_click)
-
+                if audio_base64:
+                    audio_html = f"""
+                    <audio controls style="width: 100%; height: 30px;">
+                        <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mpeg">
+                        הדפדפן שלך לא תומך בהשמעת אודיו.
+                    </audio>
+                    """
+                    components.html(audio_html, height=40)  # הקטנת גובה נוסף
+                else:
+                    st.error(f"Could not load audio for {song_name}.")

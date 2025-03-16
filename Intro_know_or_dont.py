@@ -19,7 +19,6 @@ def set_background(image_file):
         st.markdown(page_background, unsafe_allow_html=True)
 
 def Intro_know_or_dont_page():
-    time.sleep(0.2)
     set_background("other images/Backround.webp")
 
     st.markdown(
@@ -29,12 +28,20 @@ def Intro_know_or_dont_page():
             background: linear-gradient(135deg, #2a5ba8, #4c82c7, #3b6fb3);
             color: white;
             border-radius: 25px;
-            padding: 30px;
+            padding: 25px;
+            padding-bottom: 10px;
+            padding: 15px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             max-width: 450px;
             margin: auto;
             font-family: 'Poppins', sans-serif;
+        }
+        .header {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
         }
         .header-small {
             font-size: 14.5px;
@@ -44,10 +51,10 @@ def Intro_know_or_dont_page():
             padding: 2px 6px; /* ריפוד פנימי כדי לתת לתיבה גודל */
             border-radius: 5px; /* עיגול פינות לרקע */
         }
-
-
-
-
+        .block-container {
+            padding-top: 25px !important;
+            margin-top: 25px !important;
+        }
         .header-main {
             font-size: 18px;
             font-weight: 600;
@@ -69,26 +76,32 @@ def Intro_know_or_dont_page():
             color: #ffffff;
         }
         .green-text {
-            color: #36c95f; /* ירוק מותאם */
+            color: #008000; 
             font-weight: 600;
         }
         .red-text {
-            color: #e04b4b; /* אדום מותאם */
+            color: red; 
             font-weight: 600;
         }
         </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    persona_name = st.session_state.persona
+
+    st.markdown(f"""
         <div class="container">
-            <div class="header-small">Soon, we’ll test your intuition against the recommendation system!</div>
-            <div class="header-main">But first, let’s get familiar with your persona’s music taste.</div>
-            <div class="sub-header">We’ll now show you songs that X loves. Listen to them to get to know X better and select if you know or don’t know each one.</div>
+            <div class="header-small">Soon, you'll be recommending songs for your new friend!</div>
+            <div class="header-main">But first, let’s get familiar with {persona_name}</div>
+            <div class="header"> Know or Don't Know? </div>
+            <div class="sub-header">We’ll now show you  <strong> songs that {persona_name} likes </strong>. Listen to them to get to know {persona_name} better and select if you know or don’t know each one.</div>
             <div class="description">
                 <span class="green-text">Know this song?</span> Tap ✅<br>
                 <span class="red-text">Never heard of it?</span> Tap ❌
             </div>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    """, unsafe_allow_html=True)
 
 
     def handle_start_click():
@@ -96,5 +109,5 @@ def Intro_know_or_dont_page():
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        st.button("Let's Continue", key="continue-btn", on_click=handle_start_click, use_container_width=True)
+        st.button("Let's go!", key="continue-btn", on_click=handle_start_click, use_container_width=True)
 

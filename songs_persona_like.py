@@ -43,14 +43,13 @@ def songs_persona_like_page():
                 margin-top: 7px !important;
             }
             .song-title {
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: bold;
                 color: #ecf0f1;
                 text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 10px rgba(255, 255, 255, 0.6);
             }
             .stButton button {
-                    font-size: 40px !important;
-                    padding: 20px 60px !important;
+                    padding: 10px 30px !important;
                     border-radius: 15px !important;
                     margin: 10px auto !important;
                     display: flex !important;
@@ -78,12 +77,11 @@ def songs_persona_like_page():
             
             img {
                 border-radius: 15px;
-                max-width: 100%;
-                width: 630px; /* קובע את הרוחב */
-                height: 500px; /* קובע את הגובה */
-                object-fit: cover; /* שומר על יחס וממלא את השטח */
+                width: 500px; 
+                height: 250px; 
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                transition: transform 0.3s ease-in-out;
+                display: block;
+                margin: auto;
             }
             
             </style>
@@ -94,25 +92,24 @@ def songs_persona_like_page():
         st.markdown(
             f"""
             <div class=\"container\">
-                <div class=\"song-title\">{song_title}!!!!</div>
+                <div class=\"song-title\">{song_title}</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
         # Load image
-        image_path = f"‏‏personas_songs_images/{song_title}.jpg"
-        try:
+        col1, col2, col3 = st.columns([1, 5, 1])
+
+        with col2:
+            image_path = f"‏‏personas_songs_images/{song_title}.jpg"
             st.image(image_path, use_container_width=True)
-        except FileNotFoundError:
-            st.error(f"Could not load the album cover image for {song_title}. Please check the file path.")
+
 
         audio_path = f"personas_songs_audio/{song_title}.mp3"
-        try:
-            audio_file = open(audio_path, "rb").read()
-            st.audio(audio_file, format="audio/aac")
-        except FileNotFoundError:
-            st.error(f"Could not load the audio file for {song_title}. Please check the file path.")
+        audio_file = open(audio_path, "rb").read()
+        st.audio(audio_file, format="audio/aac")
+
 
         def handle_know_song():
             st.session_state.song_index += 1

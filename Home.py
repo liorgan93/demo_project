@@ -22,11 +22,11 @@ def home_page():
         .container {{
             background: linear-gradient(135deg, rgba(10, 10, 40, 0.9), rgba(20, 20, 60, 0.95));
             border-radius: 20px;
-            padding: 20px;
+            padding: 7px;
             box-shadow: 0px 0px 20px rgba(0, 0, 100, 0.8);
             text-align: center;
             margin: auto;
-            width: 80%;
+            width: 90%;
             max-width: 100%;
             display: flex;
             flex-direction: column;
@@ -34,14 +34,18 @@ def home_page():
             justify-content: center;
             overflow-x: hidden;
         }}
+        .block-container {{
+            padding-top: 25px !important;
+            margin-top: 25px !important;
+        }}
         .title-text {{
-            font-size: 80px;
+            font-size: 19px !important;
             font-weight: bold;
             text-shadow: 4px 4px 15px rgba(0,150,255,0.9);
             color: #B3E5FC;
         }}
         .subtitle-text {{
-            font-size: 28px;
+            font-size: 16px !important;
             text-shadow: 2px 2px 10px rgba(173,216,230,0.8);
             color: #81D4FA;
             margin-bottom: 20px;
@@ -53,8 +57,8 @@ def home_page():
         </style>
         <div class="container">
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
-            <p class="title-text"> Welcome to the Music Recommendation Experience! 🎶</p>
-            <p class="subtitle-text">Demonstrating the performance of Algorithm Y for music recommendation systems. This comparison between human intuition and data-driven solutions will be done by analyzing the differences between your song choices and the algorithm’s recommendations based on Spotify data</p>
+            <p class="title-text">🎶 Welcome to the Music Recommendation Experience 🎶</p>
+            <p class="subtitle-text">In this demo, you’ll recommend songs for someone, and we’ll compare your picks to Algorithm Y’s suggestions to demonstrate its performance. Let’s see how your intuition compares to data-driven recommendations!</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -62,11 +66,13 @@ def home_page():
 
     start = get_base64_image("other images/start.png")
 
+    st.snow()
+
     st.markdown("""
         <style>
         .st-key-start_button button{
-            width: 150px;
-            height: 150px;
+            width: 110px;
+            height: 110px;
             background-color: transparent;
             border: none;
             cursor: pointer;
@@ -92,32 +98,35 @@ def home_page():
     with col2:
         st.button("", key="start_button", on_click=click_button)
 
-
     st.markdown("""
         <style>
-        .button-container {
-            display: flex;
-            gap: 0px;
-            align-items: center;
-        }
-        .stButton > button {
-            margin: 0px !important;
-            padding: 0px 0px;
-            border-radius: 0;
-        }
-        .stButton {
-            flex-grow: 1;
-        }
+            .column-box {
+                border: 2px dashed lightblue;
+                padding: 10px;
+                text-align: center;
+            }
         </style>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1, 1,15])
+    # יצירת עמודות עם גבולות ויזואליים
+    col1, col2, col3 = st.columns([0.1, 0.1, 0.8])  # מחלקים את המסך לשני חלקים שווים
 
     with col1:
-        btn1 = st.button("A", key="btn1")
+        st.markdown('<div class="column-box">📦 עמודה 1</div>', unsafe_allow_html=True)
 
     with col2:
-        btn2 = st.button("B", key="btn2")
+        st.markdown('<div class="column-box">📦 עמודה 2</div>', unsafe_allow_html=True)
+    with col3:
+        st.markdown('<div class="column-box">📦 עמודה 3</div>', unsafe_allow_html=True)
+
+    with col1:
+        if st.button("👍 Like"):
+            st.write("You liked the song!")
+
+    with col2:
+        if st.button("👎 Dislike"):
+            st.write("You disliked the song!")
+
 
 
 

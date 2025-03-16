@@ -31,7 +31,6 @@ def persona_choose_page():
     st.markdown(
         """
         <style>
-        /* סגנון כללי לדף */
         body {
             background-color: #f7f7f7;
             font-family: 'Arial', sans-serif;
@@ -43,12 +42,13 @@ def persona_choose_page():
         .container {
             background-color: #ffffff;
             border-radius: 30px;
-            padding: 10px;
-            font-weight: 600px;
+            padding: 1px;
             text-align: center;
             font-family: Arial, sans-serif;
-            width: 100%;
-            max-width: 700px;
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .block-container {
             padding-top: 20px !important;
@@ -78,8 +78,7 @@ def persona_choose_page():
             border-radius: 15px;
             max-width: 100%;
             width: 630px;
-            height: 500px;
-            object-fit: cover;
+            height: 350px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease-in-out;
             }

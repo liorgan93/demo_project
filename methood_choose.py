@@ -23,6 +23,18 @@ def method_choose_page():
     record_advanced = get_base64_image("other images/red.jpg")
 
     # Main Title with a solid background for readability
+
+    import streamlit as st
+
+    st.markdown("""
+        <style>
+            .block-container {
+                padding-top: 15px !important;
+                margin-top: 15px !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.markdown("""
         <div style='background-color: rgba(0, 0, 50, 0.99); padding: 20px; border-radius: 10px;'>
             <h1 style='text-align: center; color: #8A2BE2; font-family: "Comic Sans MS", cursive;'>🎵 Demo - The World of Music Recommendations 🎧</h1>

@@ -29,12 +29,17 @@ def Intro_page():
             background: linear-gradient(135deg, #2a5ba8, #4c82c7, #3b6fb3);
             color: white;
             border-radius: 25px;
-            padding: 30px;
+            padding: 8px;
+            padding-bottom: 10px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             margin: auto;
             font-family: 'Poppins', sans-serif;
+        }
+        .block-container {
+            padding-top: 25px !important;
+            margin-top: 25px !important;
         }
         .header {
             font-size: 26px;
@@ -53,12 +58,20 @@ def Intro_page():
             margin-top: 20px;
             color: #ffffff;
         }
+        .green-text {
+            color: #008000; 
+            font-weight: 600;
+        }
+        .red-text {
+            color: red; 
+            font-weight: 600;
+        }
         </style>
         <div class="container">
-            <div class="header"> Like or Dislike? <br> Let's get to know your music taste! </div>
+            <div class="header"> Like or Dislike? <br> Let's explore your music taste! </div>
             <div class="description">
-                Like the song?&nbsp;&nbsp;Tap 👍<br>
-                Not your vibe?&nbsp;&nbsp;Tap 👎
+                <span class="green-text">Like the song?</span> ?&nbsp;&nbsp;Tap 👍 <br>
+                <span class="red-text">Not your vibe?</span> ?&nbsp;&nbsp;Tap 👎
             </div>
         </div>
         """,
@@ -72,4 +85,4 @@ def Intro_page():
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        st.button("Let's Start", key="start-btn", on_click=handle_start_click, use_container_width=True)
+        st.button("Let's go!", key="start-btn", on_click=handle_start_click, use_container_width=True)

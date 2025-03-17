@@ -72,7 +72,7 @@ def top_k_choose_page():
             border: 1px solid black;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-top: 10px;
+            margin-top: 0px;
         }
 
         .stButton button:hover {
@@ -133,8 +133,8 @@ def top_k_choose_page():
                 <div style="display: flex; justify-content: center; 
                             background: linear-gradient(135deg, rgba(80, 40, 120, 0.95), rgba(60, 60, 150, 0.95)); 
                             color: white; font-size: 18x; font-weight: bold; padding: 2px 0; 
-                            border-radius: 8px; width: 100%; text-align: center; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
-                    You can listen to the songs below (Loading takes a few seconds)
+                            border-radius: 50px; width: 100%; text-align: center; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+                    You can listen to the songs below (Loading the songs may take a few moments) 🎧
                 </div>
             </div>
         """, unsafe_allow_html=True)
@@ -157,7 +157,7 @@ def top_k_choose_page():
         audio_path = os.path.join(audio_folder, f"{song_name}.mp3")
 
         with cols[idx % 3]:
-            with st.expander(f"🎧 Listen to - {song_name}"):
+            with st.expander(f"🎶 Listen to - {song_name}"):
                 audio_base64 = encode_audio(audio_path)
 
                 if audio_base64:

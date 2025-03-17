@@ -108,7 +108,7 @@ def songs_persona_like_page():
         )
 
         # Load image
-        col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
+        col1, col2, col3 = st.columns([0.25, 0.5, 0.25])
 
         with col2:
             image_path = f"‏‏personas_songs_images/{song_title}.jpg"

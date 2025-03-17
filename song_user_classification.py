@@ -56,25 +56,25 @@ def song_user_classification_page():
                 align-items: center !important;
             }
 
-            .st-key-know button {
+            .st-key-like button {
                 background-color: #32CD32;
                 background-blend-mode: overlay;
                 transition: background-color 0.3s ease;
 
             }
 
-            .st-key-dont_know button {
+            .st-key-dislike button {
                 background-color: red;
                 background-blend-mode: overlay;
                 transition: background-color 0.3s ease;
 
             }
-            .st-key-know button:hover {
+            .st-key-like button:hover {
                 background-color: #008000;
                 background-blend-mode: overlay;
 
             }
-            .st-key-dont_know button:hover {
+            .st-key-dislike button:hover {
                 background-color: #B22222;
                 background-blend-mode: overlay;
 
@@ -103,7 +103,7 @@ def song_user_classification_page():
         )
 
         # Load image
-        col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
+        col1, col2, col3 = st.columns([0.25, 0.5, 0.25])
 
         with col2:
             image_path = f"classification_songs_images/{song_title}.jpeg"

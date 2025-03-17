@@ -53,6 +53,8 @@ def persona_choose_page():
         .block-container {
             padding-top: 20px !important;
             margin-top: 20px !important;
+            padding-bottom: 0px !important;
+            margin-bottom: 0px !important;
         }
 
         .title {
@@ -76,9 +78,10 @@ def persona_choose_page():
 
         img {
             border-radius: 15px;
-            max-height: 50vh;
+            max-height: 40vh;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease-in-out;
+            margin-bottom: 0px;
             }
 
         img:hover {
@@ -95,7 +98,7 @@ def persona_choose_page():
             border: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-top: 10px;
+            margin-top: 0px !important;
         }
 
         .stButton button:hover {
@@ -119,7 +122,7 @@ def persona_choose_page():
     try:
         col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
         with col2:
-            st.image(f"personas_images/{chosen_person['image']}")
+            st.image(f"personas_images/{chosen_person['image']}", use_container_width=True)
     except FileNotFoundError:
         st.error(f"Could not load the image for {chosen_person['name']}. Please check the file path.")
 

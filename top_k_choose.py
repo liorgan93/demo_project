@@ -30,13 +30,14 @@ def top_k_choose_page():
             border-radius: 10px;
             color: white;
             text-align: center;
-            margin-bottom: 1px;
-            margin-top: 1px; 
+            margin-bottom: 0px;
+            margin-top: 0px; 
         }
 
         .custom-container h3 {
             font-size: 18px;
             margin-top: 15px;
+            
         }
 
         div[data-testid="stExpander"] {
@@ -44,22 +45,29 @@ def top_k_choose_page():
             background: linear-gradient(135deg, rgba(30, 30, 80, 1), rgba(50, 50, 110, 1));
             color: white !important;
             border-radius: 8px !important;
-            margin-bottom: 0px !important;
+            margin-bottom: 0px;
+            margin-top: 0px; 
             padding: 3px !important; /* פחות padding */
         }
 
         div[data-testid="stExpander"] div.streamlit-expanderContent {
+            color: white !important;
             min-width: 100% !important;
             background: rgba(255, 255, 255, 0.1) !important;
             color: white !important;
             padding: 3px !important;
             border-radius: 8px !important;
+            margin-bottom: 0px;
+            margin-top: 0px; 
         }
 
         div[data-testid="stExpander"] summary {
+            color: white !important;
             min-width: 100% !important;
             font-size: 14px !important;
             padding: 5px !important;
+            margin-bottom: 0px;
+            margin-top: 0px; 
         }
 
         .stButton button {

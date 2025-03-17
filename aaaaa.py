@@ -5,9 +5,8 @@ import streamlit.components.v1 as components
 import base64
 import time
 
-st.set_page_config(page_title="Select Your Songs", layout="wide")
-
 def top_k_choose_page():
+    st.set_page_config(page_title="Select Your Songs", layout="wide")
     from Intro import set_background
     set_background("other images/Backround.webp")
 
@@ -62,11 +61,6 @@ def top_k_choose_page():
             min-width: 100% !important;
             font-size: 14px !important;
             padding: 5px !important;
-        }
-
-        div.st-emotion-cache-1fcmnav {
-            padding: 0px !important;
-            margin: 0px !important;
         }
 
         .stButton button {

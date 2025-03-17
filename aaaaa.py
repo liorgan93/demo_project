@@ -28,73 +28,66 @@ def top_k_choose_page():
 
         .custom-container {
             background: linear-gradient(135deg, rgba(30, 30, 80, 0.97), rgba(50, 50, 110, 0.97));
-            padding: 0px; /* הפחתת הפדינג */
+            padding: 0px; 
             border-radius: 10px;
             color: white;
             text-align: center;
-            margin-bottom: 1px; /* ביטול רווחים מיותרים */
-            margin-top: 1px; /* מוסיף רווח מהחלק העליון */
+            margin-bottom: 1px;
+            margin-top: 1px; 
         }
 
-        /* כותרת עליונה - קטנה יותר עם יותר רווח למעלה */
         .custom-container h3 {
             font-size: 18px;
             margin-top: 15px;
         }
 
-        /* Expander דחוס יותר */
         div[data-testid="stExpander"] {
-            background: linear-gradient(135deg, rgba(30, 30, 80, 0.97), rgba(50, 50, 110, 0.97));
+            background: linear-gradient(135deg, rgba(30, 30, 80, 1), rgba(50, 50, 110, 1));
             color: white !important;
             border-radius: 8px !important;
             margin-bottom: 2px !important; /* רווח מינימלי */
             padding: 3px !important; /* פחות padding */
         }
 
-        /* צמצום התוכן של ה-expander */
         div[data-testid="stExpander"] div.streamlit-expanderContent {
             background: rgba(255, 255, 255, 0.1) !important;
             color: white !important;
             padding: 3px !important;
             border-radius: 8px !important;
-            font-size: 14px; /* גופן קטן יותר */
         }
 
-        /* כותרת בתוך ה-expander קטנה יותר */
         div[data-testid="stExpander"] summary {
             font-size: 14px !important;
-            padding: 3px !important;
+            padding: 5px !important;
         }
 
-        /* צמצום מרווחים בין האלמנטים בעמודות */
         div.st-emotion-cache-1fcmnav {
             padding: 0px !important;
             margin: 0px !important;
         }
 
-        /* עיצוב כפתור */
-        .stButton > button {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #4CAF50;
-            color: white;
+        .stButton button {
+            width: 100%;
+            font-size: 18px;
+            padding: 8px;
             border-radius: 15px;
-            padding: 5px 15px; /* כפתור יותר קטן */
-            font-size: 14px;
+            background-color: #800080;
+            color: white;
+            border: 1px solid black;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
 
-        .stButton > button:hover {
-            background-color: #45a049;
+        .stButton button:hover {
+            background-color: #660066;
         }
-
     </style>
     """, unsafe_allow_html=True)
 
     with st.container():
         st.markdown(f"<div class='custom-container'><h3>Recommend to {persona_name} the Top 3 songs 🎵</h3></div>", unsafe_allow_html=True)
 
-        selected_songs = st.multiselect("", songs_data["song"].tolist(), max_selections=3)
 
         if "error_msg" not in st.session_state:
             st.session_state.error_msg = ""
@@ -106,7 +99,11 @@ def top_k_choose_page():
                 st.session_state.page = "compare_lists"
                 st.session_state.user_choice = selected_songs
 
-        st.button("Confirm", key="confirm_button", on_click=handle_confirm_click)
+        col_next = st.columns([1, 1, 1])
+        with col_next[1]:
+            selected_songs = st.multiselect("", songs_data["song"].tolist(), max_selections=3)
+
+            st.button("Confirm", key="confirm_button", on_click=handle_confirm_click, use_container_width=True)
 
         if st.session_state.error_msg:
             st.error(st.session_state.error_msg)
@@ -114,7 +111,6 @@ def top_k_choose_page():
     cols = st.columns(3, gap="small")
 
     def encode_audio(audio_path):
-        """ממיר קובץ אודיו ל-Base64"""
         try:
             with open(audio_path, "rb") as audio_file:
                 encoded_audio = base64.b64encode(audio_file.read()).decode()
@@ -127,7 +123,7 @@ def top_k_choose_page():
         audio_path = os.path.join(audio_folder, f"{song_name}.mp3")
 
         with cols[idx % 3]:
-            with st.expander(f"🎧 Listen to {song_name}"):
+            with st.expander(f"🎧 Listen to - {song_name}"):
                 audio_base64 = encode_audio(audio_path)
 
                 if audio_base64:

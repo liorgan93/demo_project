@@ -53,7 +53,7 @@ def songs_persona_like_page():
                 text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 10px rgba(255, 255, 255, 0.6);
             }
             .stButton button {
-                padding: 8px 25px !important;
+                padding: 8px 45px !important;
                 border-radius: 15px !important;
                 margin: 0px auto !important;
                 display: flex !important;
@@ -87,6 +87,7 @@ def songs_persona_like_page():
             img {
                 border-radius: 15px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                max-height: 30vh;
                 margin: auto;
                 display: flex;
                 flex-direction: column;
@@ -107,7 +108,7 @@ def songs_persona_like_page():
         )
 
         # Load image
-        col1, col2, col3 = st.columns([1, 1, 1])
+        col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
 
         with col2:
             image_path = f"‏‏personas_songs_images/{song_title}.jpg"
@@ -127,9 +128,9 @@ def songs_persona_like_page():
 
         col1, col2, col3 = st.columns(3)
 
-        with col1:
-            st.button("❌", key="dont_know", on_click=handle_dont_know_song)
-
         with col3:
-            st.button("✅", key="know", on_click=handle_know_song)
+            st.button("Dont Know ❌", key="dont_know", on_click=handle_dont_know_song)
+
+        with col1:
+            st.button("Know ✅", key="know", on_click=handle_know_song)
 

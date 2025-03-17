@@ -5,7 +5,6 @@ import time
 
 
 def song_user_classification_page():
-    time.sleep(0.2)
     set_background("other images/Backround.webp")
     songs_df = pd.read_csv('playlists_excel/classification_songs.csv')
 
@@ -17,7 +16,7 @@ def song_user_classification_page():
     current_index = st.session_state.current_song_index
 
     if current_index < len(songs_df):
-        current_song = songs_df.loc[current_index, 'song']
+        song_title = songs_df.loc[current_index, 'song']
         st.markdown(
             """
             <style>
@@ -56,25 +55,26 @@ def song_user_classification_page():
                 justify-content: center !important;
                 align-items: center !important;
             }
-            .st-key-like button {
+
+            .st-key-know button {
                 background-color: #32CD32;
                 background-blend-mode: overlay;
                 transition: background-color 0.3s ease;
 
             }
 
-            .st-key-dislike button {
+            .st-key-dont_know button {
                 background-color: red;
                 background-blend-mode: overlay;
                 transition: background-color 0.3s ease;
 
             }
-            .st-key-like button:hover {
+            .st-key-know button:hover {
                 background-color: #008000;
                 background-blend-mode: overlay;
 
             }
-            .st-key-dislike button:hover {
+            .st-key-dont_know button:hover {
                 background-color: #B22222;
                 background-blend-mode: overlay;
 
@@ -95,31 +95,32 @@ def song_user_classification_page():
 
         st.markdown(
             f"""
-            <div class="container">
-                <div class="song-title">{current_song}</div>
-            </div>
-            """,
+                    <div class=\"container\">
+                        <div class=\"song-title\">{song_title}</div>
+                    </div>
+                    """,
             unsafe_allow_html=True,
         )
-        image_path = f"classification_songs_images/{current_song}.jpeg"
+
+        # Load image
         col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
 
         with col2:
-            image_path = f"classification_songs_images/{current_song}.jpeg"
-            st.image(image_path)
+            image_path = f"classification_songs_images/{song_title}.jpeg"
+            st.image(image_path, use_container_width=True)
 
-        audio_path = f"‏‏classification_songs_audio/{current_song}.mp3"
+        audio_path = f"‏‏classification_songs_audio/{song_title}.mp3"
         audio_file = open(audio_path, "rb").read()
         st.audio(audio_file, format="audio/aac")
 
         def handle_like():
-            st.session_state.song_feedback[current_song] = "Like"
+            st.session_state.song_feedback[song_title] = "Like"
             st.session_state.current_song_index += 1
             if st.session_state.current_song_index >= len(songs_df):
                 st.session_state.page = "persona_choose"
 
         def handle_dislike():
-            st.session_state.song_feedback[current_song] = "Dislike"
+            st.session_state.song_feedback[song_title] = "Dislike"
             st.session_state.current_song_index += 1
             if st.session_state.current_song_index >= len(songs_df):
                 st.session_state.page = "persona_choose"

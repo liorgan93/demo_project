@@ -42,6 +42,7 @@ def top_k_choose_page():
         }
 
         div[data-testid="stExpander"] {
+            min-width: 100% !important;
             background: linear-gradient(135deg, rgba(30, 30, 80, 1), rgba(50, 50, 110, 1));
             color: white !important;
             border-radius: 8px !important;
@@ -50,6 +51,7 @@ def top_k_choose_page():
         }
 
         div[data-testid="stExpander"] div.streamlit-expanderContent {
+            min-width: 100% !important;
             background: rgba(255, 255, 255, 0.1) !important;
             color: white !important;
             padding: 3px !important;
@@ -57,6 +59,7 @@ def top_k_choose_page():
         }
 
         div[data-testid="stExpander"] summary {
+            min-width: 100% !important;
             font-size: 14px !important;
             padding: 5px !important;
         }

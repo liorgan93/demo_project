@@ -14,7 +14,7 @@ def top_k_choose_page():
     csv_file_path = "playlists_excel/top_k_songs.csv"
     songs_data = pd.read_csv(csv_file_path)
 
-    persona_name = "kkkkkkkk"
+    persona_name = st.session_state.persona
 
     st.markdown("""
     <style>
@@ -82,9 +82,33 @@ def top_k_choose_page():
     </style>
     """, unsafe_allow_html=True)
 
-    with st.container():
-        st.markdown(f"<div class='custom-container'><h3>Recommend to {persona_name} the Top 3 songs 🎵</h3></div>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <style>
+        .instructions {
+            background: linear-gradient(90deg, #3b5998, #4a69bd); 
+            color: white;
+            border-radius: 25px;
+            padding: 13px;
+            margin: auto;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            max-width: 500px;
+            font-family: Arial, sans-serif;
+            font-size: 22px;
+            border: 3px solid #a0c4ff;
+            margin-bottom: 0px !important;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        """,
+        unsafe_allow_html=True,
+    )
 
+
+    with st.container():
+        st.markdown(f"""<div class="instructions"> 
+                            <div class="song-title">Choose the TOP 3 songs you would recommend for {persona_name}</div>""",unsafe_allow_html = True)
 
         if "error_msg" not in st.session_state:
             st.session_state.error_msg = ""
@@ -97,10 +121,21 @@ def top_k_choose_page():
                 st.session_state.user_choice = selected_songs
 
         col_next = st.columns([1, 1, 1])
+
         with col_next[1]:
             selected_songs = st.multiselect("", songs_data["song"].tolist(), max_selections=3)
-
             st.button("Confirm", key="confirm_button", on_click=handle_confirm_click, use_container_width=True)
+
+        st.markdown("""
+            <div style="width: 100%; text-align: center; margin: 25px 0;">
+                <div style="display: flex; justify-content: center; 
+                            background: linear-gradient(135deg, rgba(80, 40, 120, 0.95), rgba(60, 60, 150, 0.95)); 
+                            color: white; font-size: 18x; font-weight: bold; padding: 2px 0; 
+                            border-radius: 8px; width: 100%; text-align: center; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+                    You can listen to the songs below 🎧 🎵
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
 
         if st.session_state.error_msg:
             st.error(st.session_state.error_msg)

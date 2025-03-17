@@ -98,20 +98,6 @@ def home_page():
 
     with col2:
         st.button("", key="start_button", on_click=click_button)
-        if st.button("", key="aaaaaa"):
-            st.session_state.page = "aaaaa"
-
-
-    st.markdown("""
-        <style>
-            .column-box {
-                border: 2px dashed lightblue;
-                padding: 10px;
-                text-align: center;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
 
 
 

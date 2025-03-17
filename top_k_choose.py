@@ -44,7 +44,7 @@ def top_k_choose_page():
             background: linear-gradient(135deg, rgba(30, 30, 80, 1), rgba(50, 50, 110, 1));
             color: white !important;
             border-radius: 8px !important;
-            margin-bottom: 2px !important; /* רווח מינימלי */
+            margin-bottom: 0px !important;
             padding: 3px !important; /* פחות padding */
         }
 

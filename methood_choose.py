@@ -21,26 +21,64 @@ def method_choose_page():
     record_topk = get_base64_image("other images/blue.jpg")
     record_personalization = get_base64_image("other images/green.jpg")
     record_advanced = get_base64_image("other images/red.jpg")
+    persona_name = st.session_state.persona
 
-    # Main Title with a solid background for readability
-
-    import streamlit as st
 
     st.markdown("""
         <style>
             .block-container {
-                padding-top: 15px !important;
-                margin-top: 15px !important;
+                padding-top: 50px !important;
+            }
+            .header-container {
+                background-color: rgba(0, 0, 50, 0.99);
+                padding: 10px;
+                text-align: center;
+                margin: 0 auto 10px auto !important;
+
+            }
+
+            .header-text {
+                color: #ADD8E6;
+                font-size: 26px !important;
+                margin: 0;
+                font-weight: bold;
+            }
+            .sub-header-text {
+                color: #CCCCCC;
+                font-size: 20px;
+                margin: 0;
+                font-weight: bold;
+            }
+
+            .explanation-container {
+                background-color: rgba(30, 30, 60, 0.95);
+                padding: 8px;
+                border-radius: 20px;
+                margin-top: 0px;
+            }
+            .explanation-container p {
+                color: #FFFFFF;
+                font-size: 14px;
+                margin: 5px 0;
             }
         </style>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-        <div style='background-color: rgba(0, 0, 50, 0.99); padding: 20px; border-radius: 10px;'>
-            <h1 style='text-align: center; color: #8A2BE2; font-family: "Comic Sans MS", cursive;'>🎵 Demo - The World of Music Recommendations 🎧</h1>
-            <h3 style='text-align: center; color: #ADD8E6;'>Choose your record and start playing! 🎶</h3>
+
+    st.markdown(f"""
+        <div class="header-container">
+            <p class="header-text">Now that you know {persona_name}, recommend songs!</p>
+            <p class="sub-header-text">Choose a task to compare your choices to the algorithm's results</p>
+        </div>
+
+        <div class="explanation-container">
+            <p><strong>1️⃣ <span style="text-decoration: underline;">Perfect Precision:</span></strong> Pick exactly the TOP 3 songs, no mistakes allowed.</p>
+            <p><strong>2️⃣ <span style="text-decoration: underline;">Relevant Set:</span></strong> Choose the TOP 3, order doesn’t matter.</p>
+            <p><strong>3️⃣ <span style="text-decoration: underline;">Ordered List:</span></strong> Select and rank the TOP 3 songs in the correct order.</p>
         </div>
     """, unsafe_allow_html=True)
+
+
 
     # Styling with CSS
     st.markdown("""
@@ -79,6 +117,6 @@ def method_choose_page():
     col1, col2, col3 = st.columns([1,1,1])
 
     with col2:
-        st.button("", key="aa", on_click=click_a, use_container_width=True)
-        st.button("", key="bb", on_click=click_b, use_container_width=True)
-        st.button("", key="cc", on_click=click_c, use_container_width=True)
+        st.button("Perfect Precision", key="aa", on_click=click_a, use_container_width=True)
+        st.button("Relevant\nSet", key="bb", on_click=click_b, use_container_width=True)
+        st.button("Ordered\nList", key="cc", on_click=click_c, use_container_width=True)

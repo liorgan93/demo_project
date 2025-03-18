@@ -175,6 +175,8 @@ def top_k_choose_page():
                         הדפדפן שלך לא תומך בהשמעת אודיו.
                     </audio>
                     """
-                    components.html(audio_html, height=40)  # הקטנת גובה נוסף
+                    components.html(audio_html, height=40)
                 else:
                     st.error(f"Could not load audio for {song_name}.")
+
+    st.markdown("<div style='height:30px;'></div>", unsafe_allow_html=True)

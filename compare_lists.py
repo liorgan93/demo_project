@@ -37,23 +37,34 @@ def compare_lists_page():
     st.markdown(
         """
         <style>
+        /* הסרת רווחים מהחלק העליון של הדף */
+        .block-container {
+            padding-top: 50px !important;
+        }
+
         [data-testid="stAppViewContainer"] {
             width: 100vw;
             overflow-x: hidden;
             padding: 0;
         }
+
         .center-text {
             text-align: center;
+            margin-top: 0px;
+            padding-top: 0px;
         }
+
         .stDataFrame {
             max-width: 100%;
         }
+
         .success-text {
             color: #4CAF50;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
         }
+
         .failure-text {
             color: #E53935;
             font-size: 18px;
@@ -65,20 +76,18 @@ def compare_lists_page():
         unsafe_allow_html=True
     )
 
-    st.markdown('<h1 class="center-text">🎵 Your Selections vs. Algorithm\'s Picks</h1>', unsafe_allow_html=True)
-    st.markdown(
-        '<h3 class="center-text">Here\'s a direct comparison of your song choices and what the algorithm picked for you:</h3>',
-        unsafe_allow_html=True)
+    st.markdown('<h3 class="center-text">Here\'s a direct comparison of your song choices and what the algorithm picked for you:</h3>',
+        unsafe_allow_html=True
+    )
 
     col1, col2, col3 = st.columns([0.2, 0.6, 0.2])
     with col2:
-        st.subheader(f"✅ Matches: {total_matches}/{total_possible}")
         st.dataframe(comparison_df, hide_index=True, use_container_width=True)
 
     if match_percentage >= 50:
-        st.markdown('<p class="success-text">Great match! You and the algorithm think alike! 🎉</p>', unsafe_allow_html=True)
+        st.markdown('<p class="success-text">Your recommendations are very similar to RankDist’s!</p>', unsafe_allow_html=True)
     else:
-        st.markdown('<p class="failure-text">Not a great match... Maybe next time! ❌</p>', unsafe_allow_html=True)
+        st.markdown('<p class="failure-text">Your recommendations differ from RankDist’s</p>', unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:

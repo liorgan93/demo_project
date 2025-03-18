@@ -60,7 +60,7 @@ def home_page():
         <div class="container">
             <img src="data:image/webp;base64,{image_base64}" alt="Opening Image" class="treble-clef">
             <p class="title-text">Welcome to the Music Recommendation Experience 🎶</p>
-            <p class="subtitle-text">In this demo, you’ll recommend songs for someone, and we’ll compare your picks to Algorithm Y’s suggestions to demonstrate its performance. Let’s see how your intuition compares to data-driven recommendations!</p>
+            <p class="subtitle-text">In this demo, you’ll recommend songs for someone, and we’ll compare your picks to Algorithm RankDist's suggestions to demonstrate its performance. Let’s see how your intuition compares to data-driven recommendations!</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -98,6 +98,8 @@ def home_page():
 
     with col2:
         st.button("", key="start_button", on_click=click_button)
+        if st.button("", key="dd"):
+            st.session_state.page = "method_choose"
 
 
 

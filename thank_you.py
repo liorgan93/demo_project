@@ -60,7 +60,7 @@ def thank_you_page():
                 We appreciate your time and hope you enjoyed the demo. If you'd like to To learn more about the methods demonstrated in this demo, You're welcome to download the paper below!
             </div>
             <div class="download-button">
-                <a href="top_k_songs.csv" download>⬇️ Download Paper (PDF)</a>
+                <a href="A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf" download>⬇️ Download Paper (PDF)</a>
             </div>
         </div>
         """,

@@ -91,6 +91,7 @@ def home_page():
             transform: rotate(360deg) scale(1.1);
             box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
         }
+        
         </style>
     """, unsafe_allow_html=True)
 
@@ -98,8 +99,6 @@ def home_page():
 
     with col2:
         st.button("", key="start_button", on_click=click_button)
-        if st.button("", key="dd"):
-            st.session_state.page = "method_choose"
 
 
 
@@ -135,6 +134,3 @@ elif st.session_state.page == "compare_lists":
 elif st.session_state.page == "thank_you":
     from thank_you import thank_you_page
     thank_you_page()
-elif st.session_state.page == "aaaaa":
-    from aaaaa import top_k_choose_page
-    top_k_choose_page()

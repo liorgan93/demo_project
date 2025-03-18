@@ -1,10 +1,20 @@
 import streamlit as st
 from Intro import set_background
 import time
+import base64
+
 
 # Mobile-friendly "Thank You" page with enhanced styling
 def thank_you_page():
     time.sleep(0.5)
+    def get_base64_encoded_file(file_path):
+        with open(file_path, "rb") as f:
+            file_data = f.read()
+            return base64.b64encode(file_data).decode()
+
+    file_path = "A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf"
+    encoded_file = get_base64_encoded_file(file_path)
+
     set_background("other images/Backround.webp")
     st.balloons()
     st.markdown(
@@ -52,17 +62,20 @@ def thank_you_page():
                 background-color: #1C86EE;
             }
         </style>
-        <div class="thank-you-container">
-        <div class="thank-you-title">
-            🎉 Thank You for Participating! <span class="flipped-emoji">🎉</span>
-        </div>
-            <div class="thank-you-message">
-                We appreciate your time and hope you enjoyed the demo. If you'd like to To learn more about the methods demonstrated in this demo, You're welcome to download the paper below!
-            </div>
-            <div class="download-button">
-                <a href="A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf" download>⬇️ Download Paper (PDF)</a>
-            </div>
-        </div>
         """,
         unsafe_allow_html=True
     )
+
+    st.markdown(f"""
+    <div class="thank-you-container">
+        <div class="thank-you-title">
+            🎉 Thank You for Participating! <span class="flipped-emoji">🎉</span>
+        </div>
+        <div class="thank-you-message">
+            We appreciate your time and hope you enjoyed the demo. If you'd like to To learn more about the methods demonstrated in this demo, You're welcome to download the paper below!
+        </div>
+        <div class="download-button">
+            <a href="data:application/pdf;base64,{encoded_file}" download="A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf">⬇️ Download Paper (PDF)</a>
+        </div>
+    </div>""", unsafe_allow_html=True)
+

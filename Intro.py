@@ -74,7 +74,7 @@ def Intro_page():
         }
         </style>
         <div class="container">
-            <div class="header"> Like or Dislike? <br> Let's explore your music taste! </div>
+            <div class="header"> Like or Dislike? <br> First, Let get familiar with your music taste!</div>
             <div class="description">
                 <span class="green-text">Like the song?</span>&nbsp;&nbsp;Tap 👍 <br>
                 <span class="red-text">Not your vibe?</span>&nbsp;&nbsp;Tap 👎

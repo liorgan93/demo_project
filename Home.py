@@ -13,7 +13,7 @@ def home_page():
     def click_button():
         st.session_state.page = "Intro"
 
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
 
     image_base64 = get_base64_image("other images/Music_notes.png")
 

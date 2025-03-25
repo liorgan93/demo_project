@@ -8,7 +8,7 @@ def button_click():
 def persona_choose_page():
     time.sleep(0.5)
     from Intro import set_background
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
     people = [
         {
             "name": "John",

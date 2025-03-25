@@ -4,7 +4,7 @@ from Intro import set_background
 import time
 
 def get_songs_by_persona(persona_name):
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
     df = pd.read_csv('playlists_excel/personas_songs.csv')
     songs = df[df['persona'] == persona_name]['song'].tolist()
     return songs

@@ -24,7 +24,7 @@ def set_background(image_file):
 
 def Intro_page():
     time.sleep(0.5)
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
 
     st.markdown(
         """

@@ -5,7 +5,7 @@ import time
 
 
 def song_user_classification_page():
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
     songs_df = pd.read_csv('playlists_excel/classification_songs.csv')
 
     if "song_feedback" not in st.session_state:

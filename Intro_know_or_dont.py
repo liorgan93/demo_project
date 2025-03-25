@@ -23,7 +23,7 @@ def set_background(image_file):
         st.markdown(page_background, unsafe_allow_html=True)
 
 def Intro_know_or_dont_page():
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
 
     def handle_start_click():
         st.session_state.page = "songs_persona_like"

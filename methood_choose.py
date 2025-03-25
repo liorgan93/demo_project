@@ -17,7 +17,7 @@ def get_base64_image(image_path):
 
 def method_choose_page():
     from Intro import set_background
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
 
     record_topk = get_base64_image("other images/blue.jpg")
     record_personalization = get_base64_image("other images/green.jpg")

@@ -7,7 +7,7 @@ import base64
 def top_k_choose_page():
     st.set_page_config(page_title="Select Your Songs", layout="wide")
     from Intro import set_background
-    set_background("other images/Backround.webp")
+    set_background("other images/Background.webp")
 
     audio_folder = "top_k_songs_audio"
     csv_file_path = "playlists_excel/top_k_songs.csv"
@@ -172,7 +172,6 @@ def top_k_choose_page():
                     audio_html = f"""
                     <audio controls style="width: 100%; height: 30px;">
                         <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mpeg">
-                        הדפדפן שלך לא תומך בהשמעת אודיו.
                     </audio>
                     """
                     components.html(audio_html, height=40)

@@ -1,6 +1,5 @@
 import streamlit as st
 import base64
-import time
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as file:
@@ -53,10 +52,10 @@ def Intro_know_or_dont_page():
         .header-small {
             font-size: 14.5px;
             font-weight: 700;
-            color: #FFFFFF; /* טקסט לבן */
-            background-color: rgba(94, 35, 157, 0.8); /* רקע סגול חצי שקוף */
-            padding: 2px 6px; /* ריפוד פנימי כדי לתת לתיבה גודל */
-            border-radius: 5px; /* עיגול פינות לרקע */
+            color: #FFFFFF; 
+            background-color: rgba(94, 35, 157, 0.8); 
+            padding: 2px 6px; 
+            border-radius: 5px; 
         }
         .block-container {
             padding-top: 25px !important;
@@ -66,14 +65,14 @@ def Intro_know_or_dont_page():
             font-size: 18px;
             font-weight: 600;
             color: #ffffff;
-            font-family: 'Arial', sans-serif; /* גופן מובדל */
+            font-family: 'Arial', sans-serif; 
             margin-bottom: 12px;
         }
         .sub-header {
             font-size: 16px;
             font-weight: 500;
             color: #ffffff;
-            font-family: 'Verdana', sans-serif; /* גופן שונה להדגשה */
+            font-family: 'Verdana', sans-serif; 
             margin-bottom: 15px;
         }
         .description {

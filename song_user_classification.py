@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from Intro import set_background
-import time
 
 
 def song_user_classification_page():

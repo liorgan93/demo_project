@@ -65,7 +65,7 @@ def method_choose_page():
         </style>
     """, unsafe_allow_html=True)
 
-
+    # Currently all simulated choices lead the user to select TOP-K, this will be updated later
     st.markdown(f"""
         <div class="header-container">
             <p class="header-text">Now that you know {persona_name}, recommend songs!</p>
@@ -81,7 +81,6 @@ def method_choose_page():
 
 
 
-    # Styling with CSS
     st.markdown("""
         <style>
         .st-key-aa button, .st-key-bb button, .st-key-cc button {

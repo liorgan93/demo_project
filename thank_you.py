@@ -4,7 +4,6 @@ import time
 import base64
 
 
-# Mobile-friendly "Thank You" page with enhanced styling
 def thank_you_page():
     time.sleep(0.5)
     def get_base64_encoded_file(file_path):

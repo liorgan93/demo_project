@@ -24,6 +24,7 @@ def persona_choose_page():
         },
     ]
 
+    # Classification is temporarily based on random choices instead of the user input
     chosen_person = random.choice(people)
     if "persona" not in st.session_state:
         st.session_state.persona = chosen_person["name"]

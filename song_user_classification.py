@@ -126,7 +126,7 @@ def song_user_classification_page():
         iframe_code = """
         <iframe style="border-radius:12px; margin-bottom:0;" 
                 src="https://open.spotify.com/embed/track/4vTcPHQlE3zTULythSilu0?utm_source=generator" 
-                width="100%" height="56" frameBorder="0" allowfullscreen=""
+                width="100%" height="90" frameBorder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                 loading="lazy">
         </iframe>

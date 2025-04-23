@@ -126,12 +126,12 @@ def song_user_classification_page():
         iframe_code = """
         <iframe style="border-radius:12px; margin-bottom:0;" 
                 src="https://open.spotify.com/embed/track/4vTcPHQlE3zTULythSilu0?utm_source=generator" 
-                width="100%" height="90" frameBorder="0" allowfullscreen=""
+                width="100%" height="85" frameBorder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                 loading="lazy">
         </iframe>
         """
-        st.components.v1.html(iframe_code, height=90)
+        st.components.v1.html(iframe_code, height=85)
 
         
         col1, col2, col3 = st.columns(3)

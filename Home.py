@@ -10,7 +10,7 @@ def get_base64_image(image_path):
 
 
 def home_page():
-    iframe_code = """<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4vTcPHQlE3zTULythSilu0?utm_source=generator" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+    iframe_code = """<iframe style="border-radius:12px; margin-bottom: 0;" src="https://open.spotify.com/embed/track/4vTcPHQlE3zTULythSilu0?utm_source=generator" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
     st.components.v1.html(iframe_code)
     def click_button():
         st.session_state.page = "Intro"

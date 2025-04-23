@@ -123,7 +123,10 @@ def song_user_classification_page():
             st.session_state.current_song_index += 1
             if st.session_state.current_song_index >= len(songs_df):
                 st.session_state.page = "persona_choose"
-
+        iframe_code = """<iframe style="border-radius:12px; margin-bottom: 0;" src="https://open.spotify.com/embed/track/4vTcPHQlE3zTULythSilu0?utm_source=generator" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+    with st.container():
+        st.components.v1.html(iframe_code, height=100)
+        
         col1, col2, col3 = st.columns(3)
 
         with col3:

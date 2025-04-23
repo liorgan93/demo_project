@@ -131,7 +131,7 @@ def song_user_classification_page():
                 loading="lazy">
         </iframe>
         """
-        st.components.v1.html(iframe_code, height=56)
+        st.components.v1.html(iframe_code, height=90)
 
         
         col1, col2, col3 = st.columns(3)

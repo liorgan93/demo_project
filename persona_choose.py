@@ -1,33 +1,25 @@
 import streamlit as st
-import random
+import pandas as pd
 import time
+import ast
+from Intro import set_background
+from classsification_functions import classify_user_by_preferences
+
+
 
 def button_click():
     st.session_state.page = "Intro_know_or_dont"
 
 def persona_choose_page():
     time.sleep(0.5)
-    from Intro import set_background
     set_background("other images/Background.webp")
-    people = [
-        {
-            "name": "John",
-            "image": "persona_A.jpg",
-        },
-        {
-            "name": "Bob",
-            "image": "persona_B.jpg",
-        },
-        {
-            "name": "Alice",
-            "image": "persona_C.jpg",
-        },
-    ]
-
-    # Classification is temporarily based on random choices instead of the user input
-    chosen_person = random.choice(people)
+    st.session_state.songs_df['like/dislike'] = st.session_state.song_feedback
+    st.session_state.songs_df['weights'] = st.session_state.songs_df['weights'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    st.session_state.chosen_person_number, scores = classify_user_by_preferences(st.session_state.songs_df)
     if "persona" not in st.session_state:
-        st.session_state.persona = chosen_person["name"]
+        names = pd.read_csv("playlists_excel/names.csv")
+        names_list = names[names["cluster"] == st.session_state.chosen_person_number]["name"].tolist()
+        st.session_state.persona = ", ".join(names_list)
 
     st.markdown(
         """
@@ -109,11 +101,10 @@ def persona_choose_page():
         """,
         unsafe_allow_html=True,
     )
-
     st.markdown(
         f"""
             <div class="container">
-                <div class="title">Meet {chosen_person['name']}!</div>
+                <div class="title">Meet {st.session_state.persona}!</div>
                 <div class="sub_title"> based on your musical taste you can be friends! </div>
             </div>
             """,
@@ -123,9 +114,9 @@ def persona_choose_page():
     try:
         col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
         with col2:
-            st.image(f"personas_images/{chosen_person['image']}", use_container_width=True)
+            st.image(f"personas_images/{st.session_state.persona}.jpg", use_container_width=True)
     except FileNotFoundError:
-        st.error(f"Could not load the image for {chosen_person['name']}. Please check the file path.")
+        st.error(f"Could not load the image for {st.session_state.persona}. Please check the file path.")
 
 
     col_next = st.columns([1, 1, 1])

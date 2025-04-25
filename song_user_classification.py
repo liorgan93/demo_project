@@ -1,21 +1,45 @@
 import streamlit as st
 import pandas as pd
 from Intro import set_background
+import ast
+from collections import Counter
+from classsification_functions import sample_unique_tracks_per_cluster
 
 
 def song_user_classification_page():
     set_background("other images/Background.webp")
-    songs_df = pd.read_csv('playlists_excel/classification_songs.csv')
+    all_songs_df = pd.read_csv('playlists_excel/20songs_3_normalized.csv')
+    max_attempts = 500
+    sample_size = 7
+    n_clusters = 5
 
     if "song_feedback" not in st.session_state:
-        st.session_state.song_feedback = {}
+        st.session_state.song_feedback = []
     if "current_song_index" not in st.session_state:
         st.session_state.current_song_index = 0
+        for y in range(max_attempts):
+            sampled_df = sample_unique_tracks_per_cluster(all_songs_df)
+            sample = sampled_df.sample(n=sample_size).reset_index(drop=True)
+
+            cluster_counts = Counter()
+            for row in sample['clusters_for_track']:
+                if isinstance(row, str):
+                    row = ast.literal_eval(row)
+                cluster_counts.update(row)
+
+            unique_artists = sample['artist'].nunique() == len(sample)
+            valid_clusters = all(2 <= cluster_counts.get(cluster, 0) < 4 for cluster in range(n_clusters))
+
+            if valid_clusters and unique_artists:
+                st.session_state.songs_df = sample
+                break
 
     current_index = st.session_state.current_song_index
 
-    if current_index < len(songs_df):
-        song_title = songs_df.loc[current_index, 'song']
+    if current_index < len(st.session_state.songs_df):
+        song_title = st.session_state.songs_df.loc[current_index, 'name']
+        song_artist = st.session_state.songs_df.loc[current_index, 'artist']
+
         st.markdown(
             """
             <style>
@@ -23,8 +47,7 @@ def song_user_classification_page():
                 background: linear-gradient(90deg, #3b5998, #4a69bd); 
                 color: white;
                 border-radius: 25px;
-                padding: 13px;
-                margin: auto;
+                padding: 1px;
                 text-align: center;
                 box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
                 max-width: 500px;
@@ -37,8 +60,8 @@ def song_user_classification_page():
                 padding-left: 0px;
             }
             .block-container {
-                padding-top: 7px !important;
-                margin-top: 7px !important;
+                padding-top: 5px !important;
+                margin-top: 5px !important;
             }
             .song-title {
                 font-size: 16px;
@@ -86,6 +109,22 @@ def song_user_classification_page():
                 display: flex;
                 flex-direction: column;
             }
+            .song-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: white;
+                margin-bottom: 2px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+            
+            .song-artist {
+                font-size: 18px;
+                color: #e0ffe3;
+                font-style: normal;
+                opacity: 0.9;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            }
+
             </style>
 
             """,
@@ -94,10 +133,11 @@ def song_user_classification_page():
 
         st.markdown(
             f"""
-                    <div class=\"container\">
-                        <div class=\"song-title\">{song_title}</div>
-                    </div>
-                    """,
+            <div class="container">
+                <div class="song-title">{song_title}</div>
+                <div class="song-artist">{song_artist}</div>
+            </div>
+            """,
             unsafe_allow_html=True,
         )
 
@@ -105,33 +145,68 @@ def song_user_classification_page():
         col1, col2, col3 = st.columns([0.25, 0.5, 0.25])
 
         with col2:
-            image_path = f"classification_songs_images/{song_title}.jpeg"
+            image_path = f"classification_songs_images/{song_title}.jpg"
             st.image(image_path, use_container_width=True)
 
-        audio_path = f"‏‏classification_songs_audio/{song_title}.mp3"
-        audio_file = open(audio_path, "rb").read()
-        st.audio(audio_file, format="audio/aac")
+        track_url = st.session_state.songs_df.loc[current_index, 'embed_code']
+
+        # נחלץ את מזהה השיר מתוך הקישור
+        if "track/" in track_url:
+            track_id = track_url.split("track/")[-1].split("?")[0]
+            embed_url = f"https://open.spotify.com/embed/track/{track_id}"
+        else:
+            embed_url = track_url
+
+        st.components.v1.html(f"""
+        <div id="loader" style="display: flex; justify-content: center; align-items: center; height: 80px;">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="iframe-container" style="display: none;">
+            <iframe style="border-radius:20px; margin-bottom: 0px;" 
+                src="{embed_url}"
+                width="100%" height="80px" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <style>
+        .spinner {{
+          border: 4px solid rgba(0, 0, 0, 0.1);
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          border-left-color: #1DB954;
+          animation: spin 1s linear infinite;
+          margin: auto;
+        }}
+        @keyframes spin {{
+          to {{ transform: rotate(360deg); }}
+        }}
+        </style>
+
+        <script>
+        setTimeout(function() {{
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('iframe-container').style.display = 'block';
+        }}, 2000);
+        </script>
+        """, height=85)
+
 
         def handle_like():
-            st.session_state.song_feedback[song_title] = "Like"
+            st.session_state.song_feedback.append([1])
             st.session_state.current_song_index += 1
-            if st.session_state.current_song_index >= len(songs_df):
+            if st.session_state.current_song_index >= len(st.session_state.songs_df):
                 st.session_state.page = "persona_choose"
 
         def handle_dislike():
-            st.session_state.song_feedback[song_title] = "Dislike"
+            st.session_state.song_feedback.append([0])
             st.session_state.current_song_index += 1
-            if st.session_state.current_song_index >= len(songs_df):
+            if st.session_state.current_song_index >= len(st.session_state.songs_df):
                 st.session_state.page = "persona_choose"
-        iframe_code = """
-        <iframe style="border-radius:12px; margin-bottom:0;" 
-                src="https://open.spotify.com/embed/track/4vTcPHQlE3zTULythSilu0?utm_source=generator" 
-                width="100%" height="85" frameBorder="0" allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy">
-        </iframe>
-        """
-        st.components.v1.html(iframe_code, height=85)
+
 
         
         col1, col2, col3 = st.columns(3)

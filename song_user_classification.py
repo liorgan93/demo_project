@@ -9,10 +9,10 @@ from classsification_functions import sample_unique_tracks_per_cluster
 def song_user_classification_page():
     set_background("other images/Background.webp")
     all_songs_df = pd.read_csv('playlists_excel/20songs_3_normalized.csv')
-    max_attempts = 500
+    max_attempts = 150
     sample_size = 7
     n_clusters = 5
-
+    sample = None
     if "song_feedback" not in st.session_state:
         st.session_state.song_feedback = []
     if "current_song_index" not in st.session_state:
@@ -33,9 +33,9 @@ def song_user_classification_page():
             if valid_clusters and unique_artists:
                 st.session_state.songs_df = sample
                 break
-
+    if "songs_df" not in st.session_state:
+        st.session_state.songs_df = sample
     current_index = st.session_state.current_song_index
-
     if current_index < len(st.session_state.songs_df):
         song_title = st.session_state.songs_df.loc[current_index, 'name']
         song_artist = st.session_state.songs_df.loc[current_index, 'artist']
@@ -53,7 +53,7 @@ def song_user_classification_page():
                 max-width: 500px;
                 margin: 20px auto;
                 font-family: Arial, sans-serif;
-                font-size: 22px;
+                font-size: 20px;
                 border: 3px solid #a0c4ff;
                 margin-bottom: 3px !important;
                 padding-right: 0px;
@@ -64,6 +64,9 @@ def song_user_classification_page():
                 margin-top: 5px !important;
             }
             .song-title {
+                margin: 0;               /* 🔵 הוספתי ביטול רווח */
+                padding: 0;              /* 🔵 הוספתי ביטול רווח */
+                line-height: 1.1;
                 font-size: 16px;
                 font-weight: bold;
                 color: #ecf0f1;
@@ -104,8 +107,7 @@ def song_user_classification_page():
             img {
                 border-radius: 15px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                max-height: 30vh;
-                margin: auto;
+                max-height: 25vh;
                 display: flex;
                 flex-direction: column;
             }
@@ -113,10 +115,11 @@ def song_user_classification_page():
                 font-size: 18px;
                 font-weight: 600;
                 color: white;
-                margin-bottom: 2px;
+                margin-bottom: 0px;
+                margin-top: 0px;
                 text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             }
-            
+
             .song-artist {
                 font-size: 18px;
                 color: #e0ffe3;
@@ -130,18 +133,22 @@ def song_user_classification_page():
             """,
             unsafe_allow_html=True,
         )
+        total_steps = 7
+        completed_steps = current_index + 1
+        progress = " ".join(["●" if i < completed_steps else "○" for i in range(total_steps)])
 
         st.markdown(
             f"""
             <div class="container">
+                <div style="text-align: left; font-size: 15px; padding-left: 10px;">{progress} {completed_steps}/{total_steps}</div>
                 <div class="song-title">{song_title}</div>
                 <div class="song-artist">{song_artist}</div>
+                
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-        # Load image
         col1, col2, col3 = st.columns([0.25, 0.5, 0.25])
 
         with col2:
@@ -150,7 +157,6 @@ def song_user_classification_page():
 
         track_url = st.session_state.songs_df.loc[current_index, 'embed_code']
 
-        # נחלץ את מזהה השיר מתוך הקישור
         if "track/" in track_url:
             track_id = track_url.split("track/")[-1].split("?")[0]
             embed_url = f"https://open.spotify.com/embed/track/{track_id}"
@@ -194,7 +200,6 @@ def song_user_classification_page():
         </script>
         """, height=85)
 
-
         def handle_like():
             st.session_state.song_feedback.append([1])
             st.session_state.current_song_index += 1
@@ -207,8 +212,6 @@ def song_user_classification_page():
             if st.session_state.current_song_index >= len(st.session_state.songs_df):
                 st.session_state.page = "persona_choose"
 
-
-        
         col1, col2, col3 = st.columns(3)
 
         with col3:
@@ -216,4 +219,3 @@ def song_user_classification_page():
 
         with col1:
             st.button("👍", key="like", on_click=handle_like)
-

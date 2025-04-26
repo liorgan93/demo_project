@@ -112,7 +112,7 @@ def song_user_classification_page():
                 flex-direction: column;
             }
             .song-title {
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: 600;
                 color: white;
                 margin-bottom: 0px;
@@ -140,7 +140,7 @@ def song_user_classification_page():
         st.markdown(
             f"""
             <div class="container">
-                <div style="text-align: left; font-size: 15px; padding-left: 10px;">{progress} {completed_steps}/{total_steps}</div>
+                <div style="text-align: left; font-size: 13px; padding-left: 10px;">{progress} {completed_steps}/{total_steps}</div>
                 <div class="song-title">{song_title}</div>
                 <div class="song-artist">{song_artist}</div>
                 

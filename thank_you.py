@@ -5,7 +5,6 @@ import base64
 
 
 def thank_you_page():
-    time.sleep(0.5)
     def get_base64_encoded_file(file_path):
         with open(file_path, "rb") as f:
             file_data = f.read()

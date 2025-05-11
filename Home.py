@@ -1,8 +1,6 @@
 import streamlit as st
 import base64
 from Intro import set_background
-import time
-
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as file:
@@ -138,19 +136,4 @@ elif st.session_state.page == "research_page":
     from research_page import research_page
     research_page()
 
-import csv
 
-
-def create_csv_file(file_name):
-    if not file_name.endswith('.csv'):
-        file_name += '.csv'
-
-    with open(file_name, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(['Column1', 'Column2'])
-        writer.writerow(['Value1', 'Value2'])
-
-    print(f"נוצר הקובץ: {file_name}")
-
-
-create_csv_file("tttttttt")

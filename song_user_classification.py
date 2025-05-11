@@ -8,9 +8,9 @@ from classsification_functions import sample_unique_tracks_per_cluster
 
 def song_user_classification_page():
     set_background("other images/Background.webp")
-    all_songs_df = pd.read_csv('playlists_excel/20songs_3_normalized.csv')
+    all_songs_df = pd.read_csv('playlists_excel/15_songs_classify.csv')
     max_attempts = 150
-    sample_size = 7
+    sample_size = 10
     n_clusters = 5
     sample = None
     if "song_feedback" not in st.session_state:
@@ -64,8 +64,8 @@ def song_user_classification_page():
                 margin-top: 5px !important;
             }
             .song-title {
-                margin: 0;               /* 🔵 הוספתי ביטול רווח */
-                padding: 0;              /* 🔵 הוספתי ביטול רווח */
+                margin: 0;             
+                padding: 0;         
                 line-height: 1.1;
                 font-size: 16px;
                 font-weight: bold;
@@ -133,7 +133,7 @@ def song_user_classification_page():
             """,
             unsafe_allow_html=True,
         )
-        total_steps = 7
+        total_steps = 10
         completed_steps = current_index + 1
         progress = " ".join(["●" if i < completed_steps else "○" for i in range(total_steps)])
 

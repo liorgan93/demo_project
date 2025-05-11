@@ -1,20 +1,42 @@
 import numpy as np
 import pandas as pd
 
-def sample_unique_tracks_per_cluster(df, cluster_col='cluster', track_col='track_id', n=2):
+def sample_unique_tracks_per_cluster(df, cluster_col='cluster', track_col='track_id', artist_col='artist', n=2):
     sampled_tracks = []
     used_track_ids = set()
+    used_artist_names = set()
 
     for cluster in sorted(df[cluster_col].unique()):
         cluster_df = df[df[cluster_col] == cluster]
-        available_df = cluster_df[~cluster_df[track_col].isin(used_track_ids)]
 
-        sample = available_df.sample(n=min(n, len(available_df)))
-        sampled_tracks.append(sample)
+        available_df = cluster_df[
+            ~cluster_df[track_col].isin(used_track_ids) &
+            ~cluster_df[artist_col].isin(used_artist_names)
+        ]
 
-        used_track_ids.update(sample[track_col])
+        cluster_samples = []
 
-    return pd.concat(sampled_tracks).reset_index(drop=True)
+        while len(cluster_samples) < min(n, len(available_df)):
+            sample = available_df.sample(n=1)
+
+            cluster_samples.append(sample)
+
+            used_track_ids.update(sample[track_col])
+            used_artist_names.update(sample[artist_col])
+
+            available_df = available_df[
+                ~available_df[track_col].isin(used_track_ids) &
+                ~available_df[artist_col].isin(used_artist_names)
+            ]
+
+        if cluster_samples:
+            sampled_tracks.append(pd.concat(cluster_samples))
+
+    if sampled_tracks:
+        return pd.concat(sampled_tracks).reset_index(drop=True)
+    else:
+        return pd.DataFrame(columns=df.columns)
+
 
 
 

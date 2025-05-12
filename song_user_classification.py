@@ -4,6 +4,7 @@ from Intro import set_background
 import ast
 from collections import Counter
 from classsification_functions import sample_unique_tracks_per_cluster
+import time
 
 
 def song_user_classification_page():
@@ -37,6 +38,7 @@ def song_user_classification_page():
         st.session_state.songs_df = sample
     current_index = st.session_state.current_song_index
     if current_index < len(st.session_state.songs_df):
+        st.session_state.button_clicked = False
         song_title = st.session_state.songs_df.loc[current_index, 'name']
         song_artist = st.session_state.songs_df.loc[current_index, 'artist']
 
@@ -201,16 +203,20 @@ def song_user_classification_page():
         """, height=85)
 
         def handle_like():
-            st.session_state.song_feedback.append([1])
-            st.session_state.current_song_index += 1
-            if st.session_state.current_song_index >= len(st.session_state.songs_df):
-                st.session_state.page = "persona_choose"
+            if not st.session_state.button_clicked:
+                st.session_state.button_clicked = True
+                st.session_state.song_feedback.append([1])
+                st.session_state.current_song_index += 1
+                if st.session_state.current_song_index >= len(st.session_state.songs_df):
+                    st.session_state.page = "persona_choose"
 
         def handle_dislike():
-            st.session_state.song_feedback.append([0])
-            st.session_state.current_song_index += 1
-            if st.session_state.current_song_index >= len(st.session_state.songs_df):
-                st.session_state.page = "persona_choose"
+            if not st.session_state.button_clicked:
+                st.session_state.button_clicked = True
+                st.session_state.song_feedback.append([0])
+                st.session_state.current_song_index += 1
+                if st.session_state.current_song_index >= len(st.session_state.songs_df):
+                    st.session_state.page = "persona_choose"
 
         col1, col2, col3 = st.columns(3)
 

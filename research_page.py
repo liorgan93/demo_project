@@ -1,122 +1,86 @@
 import streamlit as st
-import base64
-
-def get_base64_image(image_path):
-    with open(image_path, "rb") as file:
-        return base64.b64encode(file.read()).decode()
-
-def set_background(image_file):
-    with open(image_file, "rb") as image:
-        encoded_image = base64.b64encode(image.read()).decode()
-        page_background = f"""
-        <style>
-        [data-testid="stAppViewContainer"] {{
-            background-image: url("data:image/jpeg;base64,{encoded_image}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #FFFFFF;
-        }}
-        </style>
-        """
-        st.markdown(page_background, unsafe_allow_html=True)
 
 def research_page():
     persona_name = st.session_state.persona
-    set_background("other images/Background.webp")
+    page_style = """
+    <style>
+    [data-testid="stApp"] {
+        background-color: #1e3a5f; /* כחול כהה */
+        color: white; /* טקסט לבן */
+    }
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        color: white;
+    }
+    h2, h3, h4 {
+        font-size: 18px;
+        color: white;
+    }
+    div[data-testid="stMarkdownContainer"] p {
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: white;
+    }
+    .stSlider > div {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    .stRadio > div {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    button[kind="primary"] {
+        background-color: black;
+        color: white;
+        border: 1px solid white;
+        font-size: 16px;
+        padding: 0.5em 1em;
+    }
+    </style>
+    """
+    st.markdown(page_style, unsafe_allow_html=True)
 
-    st.markdown(
-        """
-        <style>
-        .container {
-            background: linear-gradient(135deg, rgba(42, 91, 168, 0.97), rgba(76, 130, 199, 0.97), rgba(59, 111, 179, 0.97));
-            color: white;
-            border-radius: 25px;
-            padding: 8px;
-            padding-bottom: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            margin: auto;
-            font-family: 'Poppins', sans-serif;
-        }
-        .block-container {
-            padding-top: 25px !important;
-            margin-top: 25px !important;
-        }
-        .header {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-        .description {
-            font-size: 22px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-        .footer {
-            font-size: 16px;
-            margin-top: 20px;
-            color: #ffffff;
-        }
-        .green-text {
-            color: #50c878;
-            font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
-        }
-        .red-text {
-            color: #FF4747; 
-            font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
+    st.title(f"After listening to {persona_name} music, please answer a few questions")
+
+    # Question 1
+    st.subheader("🎧 Question 1 – Overall Connection")
+    st.markdown("To what extent did you feel connected to the music that was played for you?  \n*Scale:* 1️⃣ (Not at all) – 5️⃣ (Very much)")
+    q1 = st.slider(
+        label="",
+        min_value=1,
+        max_value=5,
+        format="%d",
+        key="slider1"
     )
 
-    st.markdown(f"""<div class="container">
-                <div class="header">You’ve just explored {persona_name}’s favorite music.<br>Did you feel a connection to their musical taste?</div>
-            </div>""", unsafe_allow_html=True)
+    st.markdown("---")
 
-    st.divider()
+    # Question 2
+    st.subheader("🎵 Question 2 – Match to Personal Taste")
+    st.markdown("To what extent do you feel the music matched your personal musical taste?  \n*Scale:* 1️⃣ (Very different) – 5️⃣ (Very similar)")
+    q2 = st.slider(
+        label="",
+        min_value=1,
+        max_value=5,
+        format="%d",
+        key="slider2"
+    )
 
-    def handle_start_click():
-        st.session_state.page = "song_user_classification"
+    st.markdown("---")
 
-    lets_go = get_base64_image("other images/lets go.png")
-    st.markdown("""
-            <style>
-            .st-key-lets_go button{
-                width: 130px;
-                height: 130px;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                border-radius: 50%;
-                transition: transform 0.6s ease-in-out, box-shadow 0.3s;
-                box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-                background-image: url('data:image/webp;base64,""" + lets_go + """');
-                background-size: cover;
-                margin: auto;
-                display: flex;
-                flex-direction: column;
+    # Question 3
+    st.subheader("🎶 Question 3 – Would You Choose It Yourself?")
+    st.markdown("If you were choosing music on your own, would you choose to listen to these songs?  \n*Answer options:* ✅ Yes / ❌ No")
+    q3 = st.radio(
+        label="",
+        options=["✅ Yes", "❌ No"],
+        horizontal=True,
+        key="radio1"
+    )
 
-            }
-            .st-key-lets_go button:hover {
-                transform: rotate(360deg) scale(1.1);
-                box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
-            }
-            </style>
-        """, unsafe_allow_html=True)
+    st.markdown("---")
 
-    col1, col2, col3 = st.columns(3)
-
-    with col3:
-        st.button("No – it wasn’t quite my vibe 🙅‍♂️ ", key="dont_know")
-
-    with col1:
-        st.button("Yes – I really liked it 🎧 ", key="know")
-
+    if st.button("Submit"):
+        pass
 

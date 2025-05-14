@@ -69,11 +69,5 @@ def thank_you_page():
         <div class="thank-you-title">
             🎉 Thank You for Participating! <span class="flipped-emoji">🎉</span>
         </div>
-        <div class="thank-you-message">
-            We appreciate your time and hope you enjoyed the demo. If you'd like to To learn more about the methods demonstrated in this demo, You're welcome to download the paper below!
-        </div>
-        <div class="download-button">
-            <a href="data:application/pdf;base64,{encoded_file}" download="A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf">⬇️ Download Paper (PDF)</a>
-        </div>
     </div>""", unsafe_allow_html=True)
 

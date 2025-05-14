@@ -8,6 +8,9 @@ import time
 
 
 def song_user_classification_page():
+    placeholder = st.empty()
+    placeholder.empty()
+
     set_background("other images/Background.webp")
     all_songs_df = pd.read_csv('playlists_excel/15_songs_classify.csv')
     max_attempts = 150

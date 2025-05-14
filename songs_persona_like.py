@@ -10,6 +10,9 @@ def get_songs_by_persona(persona_num):
     return songs_df
 
 def songs_persona_like_page():
+    placeholder = st.empty()
+    placeholder.empty()
+    
     st.session_state.persona_songs_df = get_songs_by_persona(st.session_state.chosen_person_number)
 
     if "song_index" not in st.session_state:

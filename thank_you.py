@@ -69,7 +69,11 @@ def thank_you_page():
     st.markdown(f"""
     <div class="thank-you-container">
         <div class="thank-you-title">
-            🎉 Thank You for Participating! <span class="flipped-emoji">🎉</span>
+            🎉 Thank you for your participation! <span class="flipped-emoji">🎉</span>
+        </div>
+        <div class="thank-you-message">
+            Your responses have been recorded and will help us advance our research. 
         </div>
     </div>""", unsafe_allow_html=True)
+
 

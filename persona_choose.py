@@ -13,7 +13,7 @@ def button_click():
 def persona_choose_page():
     placeholder = st.empty()
     placeholder.empty()
-    time.time(8)
+    time.sleep(8)
     set_background("other images/Background.webp")
     st.session_state.songs_df['like/dislike'] = st.session_state.song_feedback
     st.session_state.songs_df['weights'] = st.session_state.songs_df['weights'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)

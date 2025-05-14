@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 
 def compare_lists_page():
-    placeholder = st.empty()
-    placeholder.empty()
 
     selected_songs = st.session_state.user_choice
     algorithm_df = pd.read_csv("alg_results.csv")

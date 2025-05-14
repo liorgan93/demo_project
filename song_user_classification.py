@@ -8,8 +8,6 @@ import time
 
 
 def song_user_classification_page():
-    placeholder = st.empty()
-
     set_background("other images/Background.webp")
     all_songs_df = pd.read_csv('playlists_excel/15_songs_classify.csv')
     max_attempts = 150
@@ -209,7 +207,6 @@ def song_user_classification_page():
                 st.session_state.button_clicked = True
                 st.session_state.song_feedback.append([1])
                 st.session_state.current_song_index += 1
-                placeholder.empty()
                 if st.session_state.current_song_index >= len(st.session_state.songs_df):
 
                     st.session_state.page = "persona_choose"
@@ -219,7 +216,6 @@ def song_user_classification_page():
                 st.session_state.button_clicked = True
                 st.session_state.song_feedback.append([0])
                 st.session_state.current_song_index += 1
-                placeholder.empty()
                 if st.session_state.current_song_index >= len(st.session_state.songs_df):
                     st.session_state.page = "persona_choose"
 

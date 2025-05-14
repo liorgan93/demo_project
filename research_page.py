@@ -82,5 +82,7 @@ def research_page():
     st.markdown("---")
 
     if st.button("Submit"):
-        pass
+        st.session_state.page = "thank_you"
+        st.rerun()
+
 

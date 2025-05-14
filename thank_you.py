@@ -72,7 +72,8 @@ def thank_you_page():
              Thank you for your participation! <span class="flipped-emoji"></span>
         </div>
         <div class="thank-you-message">
-            Your responses have been recorded and will help us advance our research. 
+            We appreciate your time and insights — your responses will help drive our research forward.
+           Your input has been successfully recorded and will contribute meaningfully to our research.
         </div>
     </div>""", unsafe_allow_html=True)
 

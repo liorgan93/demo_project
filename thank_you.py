@@ -1,12 +1,10 @@
 import streamlit as st
-from Intro import set_background
+from user_classification_intro import set_background
 import time
 import base64
 
 
 def thank_you_page():
-    placeholder = st.empty()
-    placeholder.empty()
     def get_base64_encoded_file(file_path):
         with open(file_path, "rb") as f:
             file_data = f.read()
@@ -15,7 +13,7 @@ def thank_you_page():
     file_path = "A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf"
     encoded_file = get_base64_encoded_file(file_path)
 
-    set_background("other images/Background.webp")
+    set_background("other images/Background.jpg")
     st.balloons()
     st.markdown(
         """
@@ -69,11 +67,13 @@ def thank_you_page():
     st.markdown(f"""
     <div class="thank-you-container">
         <div class="thank-you-title">
-             Thank you for your participation! 🎉<span class="flipped-emoji"></span>
+            🎉 Thank You for Participating! <span class="flipped-emoji">🎉</span>
         </div>
         <div class="thank-you-message">
-            We appreciate your time and insights — Your input has been successfully recorded and will contribute meaningfully to our research.
+            We appreciate your time and hope you enjoyed the demo. If you'd like to To learn more about the methods demonstrated in this demo, You're welcome to download the paper below!
+        </div>
+        <div class="download-button">
+            <a href="data:application/pdf;base64,{encoded_file}" download="A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf">⬇️ Download Paper (PDF)</a>
         </div>
     </div>""", unsafe_allow_html=True)
-
 

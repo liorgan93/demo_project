@@ -6,8 +6,8 @@ import base64
 
 def top_k_choose_page():
     st.set_page_config(page_title="Select Your Songs", layout="wide")
-    from Intro import set_background
-    set_background("other images/Background.webp")
+    from user_classification_intro import set_background
+    set_background("other images/Background.png")
 
     audio_folder = "top_k_songs_audio"
     csv_file_path = "playlists_excel/top_k_songs.csv"

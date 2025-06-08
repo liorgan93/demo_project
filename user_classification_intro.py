@@ -23,17 +23,18 @@ def set_background(image_file):
         st.markdown(page_background, unsafe_allow_html=True)
 
 def user_classification_intro_page():
-    set_background("other images/Background.png")
+    st.set_page_config(page_title="RankDist Demo")
+    set_background("other images/background.webp")
 
     st.markdown(
         """
         <style>
         .container {
-            background: linear-gradient(135deg, rgba(42, 91, 168, 0.97), rgba(76, 130, 199, 0.97), rgba(59, 111, 179, 0.97));
+            background: linear-gradient(135deg, rgba(42, 91, 168, 0.98), rgba(76, 130, 199, 0.97), rgba(59, 111, 179, 0.98));
             color: white;
             border-radius: 25px;
             padding: 8px;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             max-width: 400px;
@@ -41,19 +42,32 @@ def user_classification_intro_page():
             font-family: 'Poppins', sans-serif;
         }
         .block-container {
-            padding-top: 25px !important;
-            margin-top: 25px !important;
+            padding-top: 30px !important;
+            margin-top: 30px !important;
+            padding-bottom: 0px !important;
+
         }
+        
         .header {
-            font-size: 26px;
+            margin-top: 10px;
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 20px;
             color: #ffffff;
+        }
+        .sub-header {
+            font-size: 20px;
+            font-weight: 500;
+            color: #ffffff;
+            font-family: 'Verdana', sans-serif; 
+            margin-bottom: 5px;
+            margin-top: 0px;
+
         }
         .description {
             font-size: 22px;
             font-weight: 300;
-            margin-bottom: 20px;
+            margin-top: 14px;
+            margin-bottom: 10px;
             color: #ffffff;
         }
         .footer {
@@ -73,7 +87,8 @@ def user_classification_intro_page():
         }
         </style>
         <div class="container">
-            <div class="header"> Like or Dislike? <br> First, Let get familiar with your music taste!</div>
+            <div class="header"> Like or Dislike? </div>
+            <div class="sub-header"> First, Let get familiar with your music taste! </div>
             <div class="description">
                 <span class="green-text">Like the song?</span>&nbsp;&nbsp;Tap 👍 <br>
                 <span class="red-text">Not your vibe?</span>&nbsp;&nbsp;Tap 👎
@@ -83,8 +98,6 @@ def user_classification_intro_page():
         unsafe_allow_html=True,
     )
 
-    st.divider()
-
     def handle_start_click():
         st.session_state.page = "user_classification"
 
@@ -92,12 +105,14 @@ def user_classification_intro_page():
     st.markdown("""
             <style>
             .st-key-lets_go button{
-                width: 130px;
-                height: 130px;
+                width: 125px;
+                height: 125px;
                 background-color: transparent;
                 border: none;
                 cursor: pointer;
                 border-radius: 50%;
+                margin-bottom: 0px;
+                margin-top: 20px !important;
                 transition: transform 0.6s ease-in-out, box-shadow 0.3s;
                 box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
                 background-image: url('data:image/webp;base64,""" + lets_go + """');

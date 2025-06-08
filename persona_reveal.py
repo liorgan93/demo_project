@@ -11,7 +11,8 @@ def button_click():
     st.session_state.page = "know_the_persona_intro"
 
 def persona_reveal_page():
-    set_background("other images/Background.png")
+    st.set_page_config(page_title="RankDist Demo")
+    set_background("other images/background.webp")
     st.session_state.songs_df['like/dislike'] = st.session_state.song_feedback
     st.session_state.songs_df['weights'] = st.session_state.songs_df['weights'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     st.session_state.chosen_person_number, scores = classify_user_by_preferences(st.session_state.songs_df)
@@ -52,7 +53,7 @@ def persona_reveal_page():
         }
 
         .title {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 900;
             background: linear-gradient(to bottom, #000000, #222222, #444444); /* שחור עם עומק */
             -webkit-background-clip: text;
@@ -105,8 +106,12 @@ def persona_reveal_page():
     st.markdown(
         f"""
             <div class="container">
-                <div class="title">Meet {st.session_state.persona}!</div>
-                <div class="sub_title"> Based on your musical taste, you share the same vibe! </div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span style="font-size: 24px; transform: scaleX(-1);">🎉</span>
+                <div class="title">Meet {st.session_state.persona}</div>
+                <span style="font-size: 24px;">🎉</span>
+            </div>
+            <div class="sub_title"> Based on your musical taste you share the same vibe!</div>
             </div>
             """,
         unsafe_allow_html=True,

@@ -6,9 +6,14 @@ from collections import Counter
 from classsification_functions import sample_unique_tracks_per_cluster
 import time
 
+def button_click_problem():
+    st.session_state.page = "user_classification_intro"
+    del st.session_state.song_feedback
+    del st.session_state.current_song_index
 
 def user_classification_page():
-    set_background("other images/Background.png")
+    st.set_page_config(page_title="RankDist Demo")
+    set_background("other images/background.webp")
     all_songs_df = pd.read_csv('playlists_excel/15_songs_classify.csv')
     max_attempts = 150
     sample_size = 10
@@ -57,13 +62,16 @@ def user_classification_page():
                 font-family: Arial, sans-serif;
                 font-size: 20px;
                 border: 3px solid #a0c4ff;
-                margin-bottom: 3px !important;
+                margin-bottom: 0px !important;
+                padding-bottom: 0px !important;
                 padding-right: 0px;
                 padding-left: 0px;
             }
             .block-container {
                 padding-top: 5px !important;
                 margin-top: 5px !important;
+                padding-bottom: 0px !important;
+
             }
             .song-title {
                 margin: 0;             
@@ -107,7 +115,7 @@ def user_classification_page():
 
             }
             img {
-                border-radius: 15px;
+                border-radius: 20px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 max-height: 25vh;
                 display: flex;
@@ -151,11 +159,6 @@ def user_classification_page():
             unsafe_allow_html=True,
         )
 
-        col1, col2, col3 = st.columns([0.25, 0.5, 0.25])
-
-        with col2:
-            image_path = f"classification_songs_images/{song_title}.jpg"
-            st.image(image_path, use_container_width=True)
 
         track_url = st.session_state.songs_df.loc[current_index, 'embed_code']
 
@@ -165,18 +168,21 @@ def user_classification_page():
         else:
             embed_url = track_url
 
+
         st.components.v1.html(f"""
-        <div id="loader" style="display: flex; justify-content: center; align-items: center; height: 80px;">
+        <div id="loader" style="display: flex; justify-content: center; align-items: center; height: 370px;">
             <div class="spinner"></div>
         </div>
 
-        <div id="iframe-container" style="display: none;">
-            <iframe style="border-radius:20px; margin-bottom: 0px;" 
-                src="{embed_url}"
-                width="100%" height="80px" frameBorder="0" allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy">
-            </iframe>
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div id="iframe-container" style="display: none; transform: scale(0.8); transform-origin: top center;">
+                <iframe style="border-radius:20px; margin-bottom: 0px;" 
+                    src="{embed_url}"
+                    width="100%" height="352px" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
         </div>
 
         <style>
@@ -200,7 +206,30 @@ def user_classification_page():
             document.getElementById('iframe-container').style.display = 'block';
         }}, 2000);
         </script>
-        """, height=85)
+        """, height=290)
+
+        problem_msg = """
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 200px; flex-direction: column;">
+            <div style="
+                background-color: #2b2b2b;
+                padding: 5px 10px;
+                border-radius: 12px;
+                box-shadow: 0 0 15px rgba(0,0,0,0.3);
+                color: #eeeeee;
+                text-align: center;
+                max-width: 500px;
+                font-family: 'Segoe UI', sans-serif;
+            ">
+                <h4 style="margin-top: 0; color: #dddddd;">Oops! A minor technical issue happened 🛠️</h4>
+                <p style="font-size: 16px;">
+                    Due to a technical issue, we couldn’t save your song feedback.<br>
+                    We’re sorry about that! You’ll be taken back to the start of the rating process.<br>
+                    Thanks for your patience — we really appreciate it!
+                </p>
+            </div>
+        </div>
+        <div style="height: 10px;"></div>
+        """
 
         def handle_like():
             if not st.session_state.button_clicked:
@@ -208,8 +237,14 @@ def user_classification_page():
                 st.session_state.song_feedback.append([1])
                 st.session_state.current_song_index += 1
                 if st.session_state.current_song_index >= len(st.session_state.songs_df):
-
+                    if len(st.session_state.song_feedback) > 10:
+                        st.markdown(problem_msg, unsafe_allow_html=True)
+                        col1, col2, col3 = st.columns([1, 1, 1])
+                        with col2:
+                            st.button("ok", key="ok", on_click=button_click_problem, use_container_width=True)
+                            return
                     st.session_state.page = "persona_reveal"
+
 
         def handle_dislike():
             if not st.session_state.button_clicked:
@@ -217,6 +252,12 @@ def user_classification_page():
                 st.session_state.song_feedback.append([0])
                 st.session_state.current_song_index += 1
                 if st.session_state.current_song_index >= len(st.session_state.songs_df):
+                    if len(st.session_state.song_feedback) > 10:
+                        st.markdown(problem_msg, unsafe_allow_html=True)
+                        col1, col2, col3 = st.columns([1, 1, 1])
+                        with col2:
+                            st.button("ok", key="ok", on_click=button_click_problem, use_container_width=True)
+                            return
                     st.session_state.page = "persona_reveal"
 
         col1, col2, col3 = st.columns(3)
@@ -226,3 +267,7 @@ def user_classification_page():
 
         with col1:
             st.button("👍", key="like", on_click=handle_like)
+    else:
+        st.session_state.page = "persona_reveal"
+
+

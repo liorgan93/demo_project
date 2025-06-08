@@ -22,7 +22,8 @@ def set_background(image_file):
         st.markdown(page_background, unsafe_allow_html=True)
 
 def know_the_persona_intro_page():
-    set_background("other images/Background.png")
+    st.set_page_config(page_title="RankDist Demo")
+    set_background("other images/background.webp")
 
     def handle_start_click():
         st.session_state.page = "know_the_persona"
@@ -31,10 +32,9 @@ def know_the_persona_intro_page():
         """
         <style>
         .container {
-            background: linear-gradient(135deg, rgba(42, 91, 168, 0.97), rgba(76, 130, 199, 0.97), rgba(59, 111, 179, 0.97));
+            background: linear-gradient(135deg, rgba(42, 91, 168, 0.97), rgba(76, 130, 199, 0.98), rgba(59, 111, 179, 0.98));
             color: white;
             border-radius: 25px;
-            padding: 25px;
             padding-bottom: 10px;
             padding: 15px;
             text-align: center;
@@ -43,42 +43,41 @@ def know_the_persona_intro_page():
             margin: auto;
             font-family: 'Poppins', sans-serif;
         }
-        .header {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
         .header-small {
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 700;
             color: #FFFFFF; 
             background-color: rgba(94, 35, 157, 0.8); 
-            padding: 2px 6px; 
-            border-radius: 5px; 
+            padding: 1px 4px; 
+            border-radius: 15px; 
+            margin-bottom: 17px;
+            
         }
         .block-container {
-            padding-top: 25px !important;
-            margin-top: 25px !important;
+            padding-top: 20px !important;
+            margin-top: 20px !important;
+            padding-bottom: 0px !important;
+
         }
-        .header-main {
-            font-size: 18px;
+        .header {
+            margin-top: 12px;
+            font-size: 28px;
             font-weight: 600;
             color: #ffffff;
-            font-family: 'Arial', sans-serif; 
-            margin-bottom: 12px;
         }
         .sub-header {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 500;
             color: #ffffff;
             font-family: 'Verdana', sans-serif; 
-            margin-bottom: 15px;
+            margin-bottom: 5px;
+            margin-top: 0px;
+
         }
         .description {
             font-size: 20px;
-            font-weight: 400;
-            margin-top: 20px;
+            font-weight: 300;
+            margin-top: 14px;
             color: #ffffff;
         }
         .green-text {
@@ -101,13 +100,12 @@ def know_the_persona_intro_page():
 
     st.markdown(f"""
         <div class="container">
-            <div class="header-small">Soon, you'll be recommending songs for {persona_name}!</div>
-            <div class="header-main">But first, let’s get familiar with {persona_name}</div>
+            <div class="header-small">Soon you'll recommend songs for {persona_name} 📝 but first, let’s get to know {gender_value} better better to make better recommendations 🎯</div>
             <div class="header"> Know or Don't Know? </div>
-            <div class="sub-header">We’ll now show you  <strong> songs that {persona_name} likes </strong>. Listen to them to get to know {gender_value} better and select if you know or don’t know each one.</div>
+            <div class="sub-header">We’ll now show you <strong>songs that {persona_name} likes</strong>. Listen to them to know {gender_value} better, and indicate for each song whether you know it</div>
             <div class="description">
                 <span class="green-text">Know this song?</span> Tap ✅<br>
-                <span class="red-text">Never heard of it?</span> Tap ❌
+                <span class="red-text">Never heard of it?</span> Tap ✖️️
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -117,8 +115,8 @@ def know_the_persona_intro_page():
     st.markdown("""
                 <style>
                 .st-key-lets_go button{
-                    width: 130px;
-                    height: 130px;
+                    width: 125px;
+                    height: 125px;
                     background-color: transparent;
                     border: none;
                     cursor: pointer;

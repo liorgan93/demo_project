@@ -4,21 +4,27 @@ from user_classification_intro import set_background
 import time
 
 def get_songs_by_persona(persona_num):
-    set_background("other images/Background.png")
+    set_background("other images/background.webp")
     df = pd.read_csv('playlists_excel/personas_songs.csv')
     songs_df = df[df['cluster'] == persona_num]
     return songs_df
 
 def know_the_persona_page():
-    st.session_state.persona_songs_df = get_songs_by_persona(st.session_state.chosen_person_number)
+    st.set_page_config(page_title="RankDist Demo")
+    persona_name = st.session_state.persona
+    persona_number = st.session_state.chosen_person_number
+    st.session_state.persona_songs_df = get_songs_by_persona(persona_number)
 
     if "song_index" not in st.session_state:
         st.session_state.song_index = 0
 
+    if "known_songs_count" not in st.session_state:
+        st.session_state.known_songs_count = 0
+
     current_index = st.session_state.song_index
 
-    if current_index >= len(st.session_state.persona_songs_df):
-        st.session_state.page = "research_page"
+    if st.session_state.known_songs_count >= 3 or current_index >= len(st.session_state.persona_songs_df):
+        st.session_state.page = "method_choose"
         st.rerun()
     else:
         song_title = st.session_state.persona_songs_df.iloc[current_index]["name"]
@@ -46,6 +52,8 @@ def know_the_persona_page():
             .block-container {
                 padding-top: 5px !important;
                 margin-top: 5px !important;
+                padding-bottom: 0px !important;
+
             }
             .song-title {
                 margin: 0;             
@@ -89,7 +97,7 @@ def know_the_persona_page():
 
             }
             img {
-                border-radius: 15px;
+                border-radius: 20px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 max-height: 25vh;
                 display: flex;
@@ -119,11 +127,12 @@ def know_the_persona_page():
         )
         total_steps = 5
         completed_steps = current_index + 1
-        progress = " ".join(["●" if i < completed_steps else "○" for i in range(total_steps)])
 
         st.markdown(
             f"""<div class="container">
-                <div style="text-align: left; font-size: 13px; padding-left: 10px;">{progress} {completed_steps}/{total_steps}</div>
+                <div style="text-align: left; margin-bottom: 2px; font-size: 15px; padding-left: 10px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.4);">
+                    Songs that {persona_name} Likes – Song Number {completed_steps}
+                </div>
                 <div class="song-title">{song_title}</div>
                 <div class="song-artist">{song_artist}</div>
                     </div>
@@ -131,11 +140,6 @@ def know_the_persona_page():
             unsafe_allow_html=True,
         )
 
-        col1, col2, col3 = st.columns([0.25, 0.5, 0.25])
-
-        with col2:
-            image_path = f"‏‏personas_songs_images/{song_title}.jpg"
-            st.image(image_path, use_container_width=True)
 
         track_url = st.session_state.persona_songs_df.iloc[current_index]["embed_code"]
 
@@ -150,13 +154,15 @@ def know_the_persona_page():
                     <div class="spinner"></div>
                 </div>
 
-                <div id="iframe-container" style="display: none;">
-                    <iframe style="border-radius:20px; margin-bottom: 0px;" 
+                <div style="width: 100%; display: flex; justify-content: center;">
+                    <div id="iframe-container" style="display: none; transform: scale(0.8); transform-origin: top center;">
+                        <iframe style="border-radius:20px; margin-bottom: 0px;" 
                         src="{embed_url}"
-                        width="100%" height="80px" frameBorder="0" allowfullscreen=""
+                        width="100%" height="352px" frameBorder="0" allowfullscreen=""
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                         loading="lazy">
-                    </iframe>
+                        </iframe>
+                    </div>
                 </div>
 
                 <style>
@@ -180,10 +186,11 @@ def know_the_persona_page():
                     document.getElementById('iframe-container').style.display = 'block';
                 }}, 2000);
                 </script>
-                """, height=85)
+                """, height=290)
 
         def handle_know_song():
             st.session_state.song_index += 1
+            st.session_state.known_songs_count += 1
 
         def handle_dont_know_song():
             st.session_state.song_index += 1
@@ -191,7 +198,7 @@ def know_the_persona_page():
         col1, col2, col3 = st.columns(3)
 
         with col3:
-            st.button("Dont Know ❌", key="dont_know", on_click=handle_dont_know_song)
+            st.button("Dont Know ✖️", key="dont_know", on_click=handle_dont_know_song)
 
         with col1:
             st.button("Know ✅", key="know", on_click=handle_know_song)

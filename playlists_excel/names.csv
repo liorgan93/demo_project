@@ -1,6 +1,6 @@
-﻿cluster,name
-0,David
-1,Sophia
-2,Emma
-3,Thomas
-4,Olivia
+﻿cluster,name,her/him
+0,David,him
+1,Sophia,her
+2,Emma,her
+3,Thomas,him
+4,Olivia,her

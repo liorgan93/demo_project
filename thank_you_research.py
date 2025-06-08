@@ -4,8 +4,9 @@ import time
 import base64
 
 
-def thank_you_page():
-    st.set_page_config(page_title="RankDist Demo")
+def thank_you_research():
+    placeholder = st.empty()
+    placeholder.empty()
     def get_base64_encoded_file(file_path):
         with open(file_path, "rb") as f:
             file_data = f.read()
@@ -19,42 +20,32 @@ def thank_you_page():
     st.markdown(
         """
         <style>
-            .block-container {
-                padding-bottom: 0px !important;
-    
-            }
             .flipped-emoji {
                 display: inline-block;
                 transform: scaleX(-1);
             }
+
             .thank-you-container {
                 font-family: 'Helvetica Neue', Arial, sans-serif;
                 text-align: center;
-                padding-top: 40px;
-                padding-bottom: 30px;
+                padding-top: 60px;
+                padding-bottom: 60px;
                 background: linear-gradient(135deg, rgba(225, 200, 255, 0.95), rgba(200, 220, 255, 0.95));
                 border-radius: 30px;
-                max-width: 100%;
+                max-width: 90%;
                 margin: auto;
                 box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             }
             .thank-you-title {
                 font-size: 32px;
                 font-weight: bold;
-                color: #ffffff;
-                text-align: center;
-                padding: 20px 10px;
-                margin-bottom: 25px;
-                background: linear-gradient(135deg, #1e1e3f, #3a3a8a, #6a1b9a);
-                border-radius: 15px;
-                box-shadow: 0 4px 25px rgba(58, 58, 138, 0.6), 0 0 15px rgba(106, 27, 154, 0.5);
-                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6), 0 0 10px rgba(106, 27, 154, 0.9);
-                transition: all 0.3s ease-in-out;
+                color: #222;
+                margin-bottom: 15px;
             }
             .thank-you-message {
-                font-size: 19px;
+                font-size: 20px;
                 color: #444;
-                margin-bottom: 15px;
+                margin-bottom: 25px;
                 padding: 0 15px;
             }
             .download-button a {
@@ -78,13 +69,10 @@ def thank_you_page():
     st.markdown(f"""
     <div class="thank-you-container">
         <div class="thank-you-title">
-            Thank You for Participating!
+             Thank you for your participation! 🎉<span class="flipped-emoji"></span>
         </div>
         <div class="thank-you-message">
-            We hope you enjoyed it! If you'd like to learn more about the methods demonstrated in this demo, feel free to download and read the paper below
-        </div>
-        <div class="download-button">
-            <a href="data:application/pdf;base64,{encoded_file}" download="A Rank-Based Approach to Recommender System's Top-K Queries with Uncertain Scores (Technical Report).pdf">⬇️ Download Paper (PDF)</a>
+            We appreciate your time and insights — Your input has been successfully recorded and will contribute meaningfully to our research.
         </div>
     </div>""", unsafe_allow_html=True)
 

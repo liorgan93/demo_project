@@ -164,7 +164,7 @@ def user_classification_page():
 
         if "track/" in track_url:
             track_id = track_url.split("track/")[-1].split("?")[0]
-            embed_url = f"https://open.spotify.com/embed/track/{track_id}"
+            embed_url = f"https://open.spotify.com/embed/track/{track_id}?theme=0"
         else:
             embed_url = track_url
 
@@ -175,7 +175,7 @@ def user_classification_page():
         </div>
 
         <div style="width: 100%; display: flex; justify-content: center;">
-            <div id="iframe-container" style="display: none; transform: scale(0.8); transform-origin: top center;">
+            <div id="iframe-container" style="display: none; transform: scale(0.75); transform-origin: top center;">
                 <iframe style="border-radius:20px; margin-bottom: 0px;" 
                     src="{embed_url}"
                     width="100%" height="352px" frameBorder="0" allowfullscreen=""
@@ -206,7 +206,7 @@ def user_classification_page():
             document.getElementById('iframe-container').style.display = 'block';
         }}, 2000);
         </script>
-        """, height=290)
+        """, height=270)
 
         problem_msg = """
         <div style="display: flex; justify-content: center; align-items: center; min-height: 200px; flex-direction: column;">
